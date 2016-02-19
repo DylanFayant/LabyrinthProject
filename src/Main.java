@@ -1,8 +1,13 @@
 
+/**
+ * @author Rachid Taghat - Dylan Fayant
+ * Labyrinth main class
+ */
 public class Main {
-
+	
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		LabyrinthGame game = new LabyrinthGame();
+		game.start();
 	}
 
 }
