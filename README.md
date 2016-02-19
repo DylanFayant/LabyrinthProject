@@ -1,2 +1,3 @@
-# ProjetLabyrinthe
-Jeu  du labyrinthe
+# LabyrinthProject
+
+The Labyrinth game
