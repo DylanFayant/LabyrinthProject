@@ -6,11 +6,13 @@
  */
 public class GameBoard {
 	
-	// Players positions
-
-	// TODO write comment
-	public GameBoard(int id, int id2, int id3, int id4) {
-		// Set players positions
+	// TODO (done) write comment
+	
+	/**
+	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
+	 */
+	public GameBoard() {
+		// Set pawns positions
 	}
 
 }

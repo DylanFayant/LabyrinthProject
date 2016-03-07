@@ -6,23 +6,23 @@
  */
 public class LabyrinthGame {
 	
-	// TODO write comment
+	// TODO (done) write comment
+	/**
+	 * this attribut represents the reference to the game's gameboard
+	 */
 	private GameBoard gameboard;
 
-	// TODO consider using a data structure to easily manage players as a single field
-	// TODO write comment
-	private Player playerA;
-	
-	// TODO write comment
-	private Player playerB;
-	
-	// TODO write comment
-	private Player playerC;
-	
-	// TODO write comment
-	private Player playerD;
+	// TODO (done) consider using a data structure to easily manage players as a single field
+	// TODO (done) write comment
+	/**
+	 * the players.
+	 */
+	private final Player[] players;
 
-	// TODO write comment
+	// TODO (done) write comment
+	/**
+	 * the cards in the game
+	 */
 	private Deck deck;
 
 	/**
@@ -30,26 +30,16 @@ public class LabyrinthGame {
 	 * linked to players in the gameboard's corners. Treasure cards have been distributed to players).
 	 */
 	public LabyrinthGame() {		
-		// TODO remove useless implementation comments
+		// TODO (done) remove useless implementation comments
 		
-		this.playerA = new Player(); // Create a new player
-		this.playerB = new Player(); // Create a new player
-		this.playerC = new Player(); // Create a new player
-		this.playerD = new Player(); // Create a new player
-		
-		this.gameboard = new GameBoard(this.playerA.getPlayerId(), this.playerB.getPlayerId(), this.playerC.getPlayerId(), this.playerD.getPlayerId()); // Create a new gameboard with randomly placed mobile cards and players placed to the corners
-		
-		
+		this.players = new Player[4];
+		this.gameboard = new GameBoard(); 
+	
+		// TODO: this.deck = new Deck();
 		/*
-		 * To redefine this idea of "deck" 
-		 * maybe it's better to put it directly in the gameboard...
+		 * Cards divide.
 		 */
-		this.deck = new Deck(); // Generate the common deck
-
-		this.playerA.setOwnDeck(this.deck.getPartDeck()); // Give a part of the common deck to the player.
-		this.playerB.setOwnDeck(this.deck.getPartDeck()); // Give a part of the common deck to the player.
-		this.playerC.setOwnDeck(this.deck.getPartDeck()); // Give a part of the common deck to the player.
-		this.playerD.setOwnDeck(this.deck.getPartDeck()); // Give a part of the common deck to the player.
+		
 	}
 	
 	/**

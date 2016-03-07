@@ -6,31 +6,27 @@
  */
 public class Player {
 	
-	// TODO write javadoc comment
+	// TODO (done) write javadoc comment
+	/**
+	 * Attribut representing the player id
+	 */
 	private final int playerId; // The id who represent the player.
 	
-	// TODO write javadoc comment
-	private Deck playerDeck; // This is the current player's deck.
-	
-	// TODO write comment
+	// TODO (done) write comment
+	/**
+	 * Initialise a new player with an unique id
+	 */
 	public Player() {
 		this.playerId = 0;
 	}
 
-	// TODO write comment
+	// TODO (done) write comment
+	/**
+	 * This method is used to return the player id.
+	 * @return Player id
+	 */
 	public int getPlayerId() {
 		return playerId;
-	}
-
-	// TODO fix comment (this is not a class but a method...)
-	// TODO think about a better way to "initially distribute cards to players"
-	/**
-	 * This is a temporary class used to set the player's deck.
-	 * @param partDeck
-	 */
-	public void setOwnDeck(Deck partDeck) {
-		this.playerDeck = partDeck;
-		
 	}
 
 }
