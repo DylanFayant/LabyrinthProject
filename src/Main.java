@@ -1,3 +1,4 @@
+// TODO update README.md (what/who)
 
 /**
  * Labyrinth main class who represent the application
@@ -5,6 +6,7 @@
  */
 public class Main {
 	
+	// TODO fix comment (what is the purpose of args?)
 	/**
 	 * The main method of the Main is the beggining of the application.
 	 * It's used to lunch the LabyrinthGame class.

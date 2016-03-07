@@ -6,18 +6,32 @@
  */
 public class LabyrinthGame {
 	
+	// TODO write comment
 	private GameBoard gameboard;
+
+	// TODO consider using a data structure to easily manage players as a single field
+	// TODO write comment
 	private Player playerA;
+	
+	// TODO write comment
 	private Player playerB;
+	
+	// TODO write comment
 	private Player playerC;
+	
+	// TODO write comment
 	private Player playerD;
+
+	// TODO write comment
 	private Deck deck;
 
 	/**
-	 * creates a new game play ready to be played (gameboard contains randomly placed mobile cards and 4 pions 
+	 * creates a new game play ready to be played (gameboard contains randomly placed mobile cards and 4 pawns 
 	 * linked to players in the gameboard's corners. Treasure cards have been distributed to players).
 	 */
 	public LabyrinthGame() {		
+		// TODO remove useless implementation comments
+		
 		this.playerA = new Player(); // Create a new player
 		this.playerB = new Player(); // Create a new player
 		this.playerC = new Player(); // Create a new player
