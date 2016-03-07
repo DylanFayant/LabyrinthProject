@@ -8,7 +8,7 @@ public class Main {
 	
 	// TODO (done) fix comment (what is the purpose of args?)
 	/**
-	 * The main method of the Main is the beggining of the application.
+	 * The main method of the Main class is the begining of the application.
 	 * It's used to lunch the LabyrinthGame class.
 	 * @param args The application's arguments passed in parameters to debug.
 	 */

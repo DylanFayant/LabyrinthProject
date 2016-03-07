@@ -8,13 +8,13 @@ public class Player {
 	
 	// TODO (done) write javadoc comment
 	/**
-	 * Attribut representing the player id
+	 * the player identifier
 	 */
 	private final int playerId; // The id who represent the player.
 	
 	// TODO (done) write comment
 	/**
-	 * Initialise a new player with an unique id
+	 * Initialize a new player with an unique id
 	 */
 	public Player() {
 		this.playerId = 0;
@@ -22,7 +22,7 @@ public class Player {
 
 	// TODO (done) write comment
 	/**
-	 * This method is used to return the player id.
+	 * Return the player id.
 	 * @return Player id
 	 */
 	public int getPlayerId() {

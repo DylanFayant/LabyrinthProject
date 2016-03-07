@@ -8,7 +8,7 @@ public class LabyrinthGame {
 	
 	// TODO (done) write comment
 	/**
-	 * this attribut represents the reference to the game's gameboard
+	 * the gameboard (plate + pawns + tiles)
 	 */
 	private GameBoard gameboard;
 
@@ -26,7 +26,7 @@ public class LabyrinthGame {
 	private Deck deck;
 
 	/**
-	 * creates a new game play ready to be played (gameboard contains randomly placed mobile cards and 4 pawns 
+	 * creates a new game play ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
 	 * linked to players in the gameboard's corners. Treasure cards have been distributed to players).
 	 */
 	public LabyrinthGame() {		
