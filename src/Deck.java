@@ -1,7 +1,7 @@
 // TODO fix comment (ask for advice)
 /**
  * This class represent a deck of cards.
- * The deck is a stack of cards put in a given order and that can be picked one by one.
+ * A deck is a stack of cards put in a given order and that can be picked one by one.
  * @author Rachid Taghat - Dylan Fayant
  */
 
@@ -12,7 +12,7 @@ public class Deck {
 	public final static int MAX_DECK_SIZE = 24;
 	
 	/**
-	 * cards list
+	 * cards contained in the deck
 	 */
 	private Card[] cards;
 	
@@ -20,8 +20,7 @@ public class Deck {
 	 * deck size
 	 */
 	private int deckSize;
-	
-	// TODO (done) consider writing a constructor instead of this (from where the cards come?)	
+		
 	/**
 	 * Generate the common deck by picking randomly 24 cards in the cards array
 	 */
@@ -33,6 +32,7 @@ public class Deck {
 	}
 	
 
+	// TODO returning null is relevant, but try to use exception (for training purpose)
 	/**
 	 * Pick a card
 	 * @return the next card in the top of the deck, if the deck is empty null
@@ -44,5 +44,6 @@ public class Deck {
 		this.deckSize--;
 		return this.cards[this.deckSize];
 	}
-
+	
+	// TODO override toString to be able to view the deck content (for debug purpose for the moment)
 }

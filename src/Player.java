@@ -1,26 +1,27 @@
 
 /**
- * This class represent a Player
- * It's used to manage the interaction between the player and the gameplay.
+ * This class represent a player
+ * It's used to manage the interaction between the player and the game.
  * @author Rachid Taghat - Dylan Fayant
  */
 public class Player {
 	
-	// TODO (done) write javadoc comment
+	// TODO rename field (remove "player")
 	/**
 	 * the player identifier
 	 */
-	private final int playerId; // The id who represent the player.
+	private final int playerId;
 	
-	// TODO (done) write comment
+	// TODO think about it: how the identifier can be unique
+	// since the constructor can be called several times
 	/**
-	 * Initialize a new player with an unique id
+	 * Create a new player with an unique id
 	 */
 	public Player() {
 		this.playerId = 0;
 	}
 
-	// TODO (done) write comment
+	// TODO rename method (after having renamed field)
 	/**
 	 * Return the player id.
 	 * @return Player id

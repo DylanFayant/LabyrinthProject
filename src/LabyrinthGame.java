@@ -6,33 +6,30 @@
  */
 public class LabyrinthGame {
 	
-	// TODO (done) write comment
 	/**
 	 * the gameboard (plate + pawns + tiles)
 	 */
 	private GameBoard gameboard;
 
-	// TODO (done) consider using a data structure to easily manage players as a single field
-	// TODO (done) write comment
 	/**
 	 * the players.
 	 */
 	private final Player[] players;
 
-	// TODO (done) write comment
 	/**
 	 * the cards in the game
 	 */
 	private Deck deck;
 
 	/**
-	 * creates a new game play ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
+	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
 	 * linked to players in the gameboard's corners. Treasure cards have been distributed to players).
 	 */
 	public LabyrinthGame() {		
-		// TODO (done) remove useless implementation comments
 		
+		// TODO declare a constant for default number of players
 		this.players = new Player[4];
+		
 		this.gameboard = new GameBoard(); 
 	
 		// TODO: this.deck = new Deck();
