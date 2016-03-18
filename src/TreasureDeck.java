@@ -82,8 +82,8 @@ public class TreasureDeck {
 		Treasure temporaryCard;
 		for(int i = 0; i < this.deckSize*10; i++)
 		{
-			int p1 = (int)Math.random()*this.deckSize;
-			int p2 = (int)Math.random()*this.deckSize;
+			int p1 = (int)(Math.random()*this.deckSize);
+			int p2 = (int)(Math.random()*this.deckSize);
 			temporaryCard = this.treasures[p1];
 			this.treasures[p1] = this.treasures[p2];
 			this.treasures[p2] = temporaryCard;

@@ -24,16 +24,17 @@ public class Player {
 	/** 
 	 * Player's deck
 	 */
-	//private final Deck deck;
+	private final TreasureDeck deck;
 	
 	// TODO (done) think about it: how the identifier can be unique
 	// since the constructor can be called several times
 	/**
 	 * Create a new player with an unique id
 	 */
-	public Player() {
+	public Player(TreasureDeck deck) {
 		Player.currentMaxId++;
 		this.id = currentMaxId;
+		this.deck = deck;
 	}
 
 	// TODO (done) rename method (after having renamed field)

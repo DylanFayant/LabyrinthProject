@@ -29,4 +29,5 @@ public enum Treasure
 	SWORD,
 	PIRATE,
 	DIAMOND,
+	PURSE,
 }
