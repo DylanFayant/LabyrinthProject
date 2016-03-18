@@ -6,28 +6,43 @@
  */
 public class Player {
 	
-	// TODO rename field (remove "player")
+	// TODO (done) rename field (remove "player")
 	/**
 	 * the player identifier
 	 */
-	private final int playerId;
 	
-	// TODO think about it: how the identifier can be unique
+	/**
+	 * The next id gived to a user (to make that unique)
+	 */
+	private static int currentMaxId = 0;
+	
+	/**
+	 * The player id, used to identify the player.
+	 */
+	private final int id;
+
+	/** 
+	 * Player's deck
+	 */
+	//private final Deck deck;
+	
+	// TODO (done) think about it: how the identifier can be unique
 	// since the constructor can be called several times
 	/**
 	 * Create a new player with an unique id
 	 */
 	public Player() {
-		this.playerId = 0;
+		Player.currentMaxId++;
+		this.id = currentMaxId;
 	}
 
-	// TODO rename method (after having renamed field)
+	// TODO (done) rename method (after having renamed field)
 	/**
 	 * Return the player id.
 	 * @return Player id
 	 */
-	public int getPlayerId() {
-		return playerId;
+	public int getId() {
+		return this.id;
 	}
 
 }

@@ -6,6 +6,8 @@
  */
 public class LabyrinthGame {
 	
+	private final static int DEFAULT_PLAYERS_COUNT = 4;
+	
 	/**
 	 * the gameboard (plate + pawns + tiles)
 	 */
@@ -19,7 +21,7 @@ public class LabyrinthGame {
 	/**
 	 * the cards in the game
 	 */
-	private Deck deck;
+	private TreasureDeck deck;
 
 	/**
 	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
@@ -27,8 +29,8 @@ public class LabyrinthGame {
 	 */
 	public LabyrinthGame() {		
 		
-		// TODO declare a constant for default number of players
-		this.players = new Player[4];
+		// TODO (done) declare a constant for default number of players
+		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		
 		this.gameboard = new GameBoard(); 
 	
