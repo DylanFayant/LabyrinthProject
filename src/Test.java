@@ -7,6 +7,7 @@ public class Test
 		allTreasures.shuffle();
 		TreasureDeck p1Deck = new TreasureDeck();
 		
+		
 	}
 
 }
