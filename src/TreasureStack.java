@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+import Exceptions.*;
+
 // TODO (done) if the deck is a stack, call it stack ;-)
 /**
  * This class represent a deck of treasures.
@@ -62,7 +64,7 @@ public class TreasureStack {
 	
 	/**
 	 * Add a new treasure card to the deck
-	 * @param treasure, a treasure card
+	 * @param treasure a treasure card
 	 * @throws StackIsFullException, the deck is full
 	 */
 	public void setTreasure(Treasure treasure) throws StackIsFullException

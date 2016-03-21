@@ -1,3 +1,4 @@
+import Exceptions.*;
 
 /**
  * This class is used to represent the labyrinth's GameBoard. 
@@ -10,23 +11,23 @@ public class GameBoard {
 	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
 	 */
 	public GameBoard() {
-		// Set pawns positions
 		// TODO just do it.
 		
 	}
 
 	/**
-	 * @param newInsertion
-	 * @return
-	 * @throws InvalidInsertionException
+	 * Check if the insertion is valid
+	 * @param newInsertion an insertion
+	 * @throws InvalidInsertionException, the insertion isn't valid.
 	 */
-	public boolean isInsertionValid(Insertion newInsertion) throws InvalidInsertionException
+	public void isInsertionValid(Insertion newInsertion) throws InvalidInsertionException
 	{
-		return true;
+		
 	}
 
 	/**
-	 * @param newInsertion
+	 * Process the insertion into the gameboard.
+	 * @param newInsertion an insertion
 	 */
 	public void processInsertion(Insertion newInsertion)
 	{
@@ -34,19 +35,20 @@ public class GameBoard {
 	}
 
 	/**
-	 * @param newMove
-	 * @return
-	 * @throws InvalidMoveException
+	 * Check if the move is valid.
+	 * @param newMove a move.
+	 * @throws InvalidMoveException, the mov isn't valid.
 	 */
-	public boolean isMoveValid(Move newMove) throws InvalidMoveException
+	public void isMoveValid(Move newMove) throws InvalidMoveException
 	{
-		return true;
+
 	}
 
 	/**
-	 * @param newMove
+	 * Process the player's moving.
+	 * @param newMove a move.
 	 */
-	public void setMove(Move newMove)
+	public void processMoving(Move newMove)
 	{
 		
 	}

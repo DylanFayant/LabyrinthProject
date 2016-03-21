@@ -1,3 +1,4 @@
+import Exceptions.*;
 
 /**
  * This class represents a Labyrinth game.
@@ -6,6 +7,9 @@
  */
 public class LabyrinthGame {
 	
+	/**
+	 * The players count
+	 */
 	private final static int DEFAULT_PLAYERS_COUNT = 4;
 	
 	/**
@@ -21,13 +25,7 @@ public class LabyrinthGame {
 	/**
 	 * the current player
 	 */
-	
 	private Player currentPlayer;
-
-	/**
-	 * the cards in the game
-	 */
-	private TreasureStack deck;
 	
 	/** 
 	 * Is the game over ?.
@@ -89,10 +87,16 @@ public class LabyrinthGame {
 	 * 
 	 */
 	public void play() {
+		int playerPointer = 0;
 		
-		this.currentPlayer = this.players[0];
 		while(!this.gameIsOver)
 		{
+			this.currentPlayer = this.players[playerPointer];
+			if(playerPointer < LabyrinthGame.DEFAULT_PLAYERS_COUNT)
+				playerPointer++;
+			else
+				playerPointer = 0;
+			
 			Insertion newInsertion = null;
 			while(true)
 			{
@@ -107,7 +111,6 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
-			
 			this.gameboard.processInsertion(newInsertion);
 			
 			Move newMove = null;
@@ -124,8 +127,7 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
-			
-			this.gameboard.setMove(newMove);
+			this.gameboard.processMoving(newMove);
 		}
 		
 		

@@ -40,7 +40,8 @@ public class Player {
 	}
 
 	/**
-	 * @return
+	 * Ask the player a tile insertion.
+	 * @return Insertion, a tile insertion.
 	 */
 	public Insertion askInsertion()
 	{
@@ -48,7 +49,8 @@ public class Player {
 	}
 
 	/**
-	 * @return
+	 * Ask the player a move.
+	 * @return Move, a move (position)
 	 */
 	public Move askMove()
 	{
