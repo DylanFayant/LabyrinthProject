@@ -17,11 +17,22 @@ public class LabyrinthGame {
 	 * the players.
 	 */
 	private final Player[] players;
+	
+	/**
+	 * the current player
+	 */
+	
+	private Player currentPlayer;
 
 	/**
 	 * the cards in the game
 	 */
-	private TreasureDeck deck;
+	private TreasureStack deck;
+	
+	/** 
+	 * Is the game over ?.
+	 */
+	private boolean gameIsOver;
 
 	/**
 	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
@@ -33,24 +44,91 @@ public class LabyrinthGame {
 		
 		this.gameboard = new GameBoard(); 
 	
-		// TODO: this.deck = new Deck();
 		/*
-		 * Cards divide.
+		 * Players' treasure stack generation.
 		 */
+		TreasureStack allTreasures = new TreasureStack(Treasure.values());
+		allTreasures.shuffle();
+		TreasureStack treasureStacks[] = new TreasureStack[LabyrinthGame.DEFAULT_PLAYERS_COUNT]; 
 		
+		for(int i = 0; i < LabyrinthGame.DEFAULT_PLAYERS_COUNT; i++)
+		{
+			treasureStacks[i] = new TreasureStack();
+			
+			for(int j = 0; j < TreasureStack.DEFAULT_PLAYER_STACK_SIZE; j++)
+			{
+				try {
+					treasureStacks[i].setTreasure(allTreasures.pickTreasure());
+				} catch (StackIsFullException e) {
+					// never gone
+				} catch (StackIsEmptyException e) {
+					// never gone
+				}
+			}
+			this.players[i] = new Player(treasureStacks[i]);
+		}
+		
+		this.gameIsOver = false;
 	}
 	
-	// TODO detail algorithm (ask for advice)
+	// TODO (done) detail algorithm (ask for advice)
 	/**
 	 * Plays the game 
-	 * It's a turn by turn game. The game starts by checking all players first card
-	 * who give them they goal on the gameboard.
-	 * Loop(The current player insert the free labyrinth's card in a line or a column 
-	 * and can move his pion in the way created. If he can go to his goal he gets a new 
-	 * card with a new aim. Next player turn)
-	 * When a player gets all his goals, the game play stops and he is the winner.
+	 * 
+	 * current player is player 1
+	 * while (<game is not over>)
+	 *    do
+	 *      <ask current player for insertion>
+	 *    while (<insertion is not valid>)
+	 *    <perform action>
+	 *	  do
+	 *      <ask current player for move>
+	 *    while (<move is not valid>)
+	 *    <perform move>
+	 *    current player changes
+	 * 
 	 */
 	public void play() {
+		
+		this.currentPlayer = this.players[0];
+		while(!this.gameIsOver)
+		{
+			Insertion newInsertion = null;
+			while(true)
+			{
+				newInsertion = this.currentPlayer.askInsertion();
+				try
+				{
+					this.gameboard.isInsertionValid(newInsertion);
+					break;
+				}
+				catch(InvalidInsertionException e)
+				{
+					// make the loop
+				}
+			}
+			
+			this.gameboard.processInsertion(newInsertion);
+			
+			Move newMove = null;
+			while(true)
+			{
+				newMove = this.currentPlayer.askMove();
+				try
+				{
+					this.gameboard.isMoveValid(newMove);
+					break;
+				}
+				catch(InvalidMoveException e)
+				{
+					// make the loop
+				}
+			}
+			
+			this.gameboard.setMove(newMove);
+		}
+		
+		
 
 	}
 

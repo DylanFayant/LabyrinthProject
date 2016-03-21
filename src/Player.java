@@ -19,23 +19,40 @@ public class Player {
 	/** 
 	 * Player's deck
 	 */
-	private final TreasureDeck deck;
+	private final TreasureStack treasureStack;
 	
 	/**
 	 * Create a new player with an unique id
+	 * @param treasureStack 
 	 */
-	public Player(TreasureDeck deck) {
+	public Player(TreasureStack treasureStack) {
 		Player.currentMaxId++;
 		this.id = currentMaxId;
-		this.deck = deck;
+		this.treasureStack = treasureStack;
 	}
 
 	/**
-	 * Return the player id.
+	 * Returns the player id.
 	 * @return Player id
 	 */
 	public int getId() {
 		return this.id;
+	}
+
+	/**
+	 * @return
+	 */
+	public Insertion askInsertion()
+	{
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public Move askMove()
+	{
+		return null;
 	}
 
 }
