@@ -29,7 +29,6 @@ public class LabyrinthGame {
 	 */
 	public LabyrinthGame() {		
 		
-		// TODO (done) declare a constant for default number of players
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		
 		this.gameboard = new GameBoard(); 
@@ -41,6 +40,7 @@ public class LabyrinthGame {
 		
 	}
 	
+	// TODO detail algorithm (ask for advice)
 	/**
 	 * Plays the game 
 	 * It's a turn by turn game. The game starts by checking all players first card

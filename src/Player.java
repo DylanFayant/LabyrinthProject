@@ -6,11 +6,6 @@
  */
 public class Player {
 	
-	// TODO (done) rename field (remove "player")
-	/**
-	 * the player identifier
-	 */
-	
 	/**
 	 * The next id gived to a user (to make that unique)
 	 */
@@ -26,8 +21,6 @@ public class Player {
 	 */
 	private final TreasureDeck deck;
 	
-	// TODO (done) think about it: how the identifier can be unique
-	// since the constructor can be called several times
 	/**
 	 * Create a new player with an unique id
 	 */
@@ -37,7 +30,6 @@ public class Player {
 		this.deck = deck;
 	}
 
-	// TODO (done) rename method (after having renamed field)
 	/**
 	 * Return the player id.
 	 * @return Player id

@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-// TODO fix comment (ask for advice)
+// TODO if the deck is a stakc, call it stack ;-)
 /**
  * This class represent a deck of treasures.
  * A deck is a stack of treasures put in a given order and that can be picked one by one.
@@ -49,7 +49,6 @@ public class TreasureDeck {
 		this.deckSize = deckSize;
 	}
 	
-	// TODO (done) returning null is relevant, but try to use exception (for training purpose)
 	/**
 	 * Pick a treasure
 	 * @return Treasures, the next treasure in the top of the deck
@@ -98,6 +97,4 @@ public class TreasureDeck {
 	{
 		return "Deck [treasures=" + Arrays.toString(this.treasures) + ", deckSize=" + this.deckSize + "]";
 	}
-	
-	// TODO (done) override toString to be able to view the deck content (for debug purpose for the moment)
 }
