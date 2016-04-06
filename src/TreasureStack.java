@@ -1,8 +1,6 @@
 import java.util.Arrays;
 
 import Exceptions.*;
-
-// TODO (done) if the deck is a stack, call it stack ;-)
 /**
  * This class represent a deck of treasures.
  * A deck is a stack of treasures put in a given order and that can be picked one by one.

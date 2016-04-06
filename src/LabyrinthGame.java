@@ -69,7 +69,6 @@ public class LabyrinthGame {
 		this.gameIsOver = false;
 	}
 	
-	// TODO (done) detail algorithm (ask for advice)
 	/**
 	 * Plays the game 
 	 * 
@@ -92,6 +91,8 @@ public class LabyrinthGame {
 		while(!this.gameIsOver)
 		{
 			this.currentPlayer = this.players[playerPointer];
+			
+			// TODO use modulus (%)
 			if(playerPointer < LabyrinthGame.DEFAULT_PLAYERS_COUNT)
 				playerPointer++;
 			else
@@ -106,6 +107,8 @@ public class LabyrinthGame {
 					this.gameboard.isInsertionValid(newInsertion);
 					break;
 				}
+				// TODO isInsertionValid should not raise an exception in that case
+				// (ask for advice)
 				catch(InvalidInsertionException e)
 				{
 					// make the loop
@@ -129,9 +132,5 @@ public class LabyrinthGame {
 			}
 			this.gameboard.processMoving(newMove);
 		}
-		
-		
-
 	}
-
 }

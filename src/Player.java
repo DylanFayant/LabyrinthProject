@@ -1,4 +1,3 @@
-
 /**
  * This class represent a player
  * It's used to manage the interaction between the player and the game.
