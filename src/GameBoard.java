@@ -6,49 +6,53 @@ import Exceptions.*;
  * @author Rachid Taghat - Dylan Fayant
  */
 public class GameBoard {
+
+	private static final int WIDTH = 7;
+	private static final int HEIGHT = 7;
+	TilePositioned[][] gameBoard;
 	
 	/**
 	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
 	 */
 	public GameBoard() {
-		// TODO just do it.
+		gameBoard = new TilePositioned[GameBoard.WIDTH][GameBoard.HEIGHT];
 		
-	}
+		// TODO: finish the generation of the fixed tiles
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE3, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE5, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
 
-	/**
-	 * Check if the insertion is valid
-	 * @param newInsertion an insertion
-	 * @throws InvalidInsertionException, the insertion isn't valid.
-	 */
-	public void isInsertionValid(Insertion newInsertion) throws InvalidInsertionException
-	{
-		
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
+		gameBoard[0][0] = new TilePositioned(Tile.TILE1, Rotation.ROTATION2, true);
 	}
 
 	/**
 	 * Process the insertion into the gameboard.
 	 * @param newInsertion an insertion
 	 */
-	public void processInsertion(Insertion newInsertion)
+	public void processInsertion(Insertion newInsertion) throws InvalidInsertionException
 	{
 		
-	}
-
-	/**
-	 * Check if the move is valid.
-	 * @param newMove a move.
-	 * @throws InvalidMoveException, the mov isn't valid.
-	 */
-	public void isMoveValid(Move newMove) throws InvalidMoveException
-	{
-
 	}
 
 	/**
 	 * Process the player's moving.
 	 * @param newMove a move.
 	 */
-	public void processMoving(Move newMove)
+	public void processMoving(Move newMove) throws InvalidMoveException
 	{
 		
 	}

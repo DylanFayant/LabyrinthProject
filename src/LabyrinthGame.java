@@ -92,11 +92,8 @@ public class LabyrinthGame {
 		{
 			this.currentPlayer = this.players[playerPointer];
 			
-			// TODO use modulus (%)
-			if(playerPointer < LabyrinthGame.DEFAULT_PLAYERS_COUNT)
-				playerPointer++;
-			else
-				playerPointer = 0;
+			// TODO (done) use modulus (%)
+			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 			
 			Insertion newInsertion = null;
 			while(true)
@@ -104,17 +101,17 @@ public class LabyrinthGame {
 				newInsertion = this.currentPlayer.askInsertion();
 				try
 				{
-					this.gameboard.isInsertionValid(newInsertion);
+					this.gameboard.processInsertion(newInsertion);
 					break;
 				}
-				// TODO isInsertionValid should not raise an exception in that case
+				// TODO (done) isInsertionValid should not raise an exception in that case
 				// (ask for advice)
 				catch(InvalidInsertionException e)
 				{
 					// make the loop
 				}
 			}
-			this.gameboard.processInsertion(newInsertion);
+			
 			
 			Move newMove = null;
 			while(true)
@@ -122,7 +119,7 @@ public class LabyrinthGame {
 				newMove = this.currentPlayer.askMove();
 				try
 				{
-					this.gameboard.isMoveValid(newMove);
+					this.gameboard.processMoving(newMove);
 					break;
 				}
 				catch(InvalidMoveException e)
@@ -130,7 +127,6 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
-			this.gameboard.processMoving(newMove);
 		}
 	}
 }
