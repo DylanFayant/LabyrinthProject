@@ -127,6 +127,9 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
+			
+			// TODO  make the system of win 
+			this.gameIsOver = true;
 		}
 	}
 }

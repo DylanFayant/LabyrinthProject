@@ -107,21 +107,6 @@ public class GameBoard {
 		tilesMovable.add(new TilePositionedMovable(Tile.TILE46, Rotation.ROTATION1));
 		tilesMovable.add(new TilePositionedMovable(Tile.TILE48, Rotation.ROTATION1));
 		
-		for(int i = 0; i < GameBoard.WIDTH; i++)
-		{
-			for(int j = 0; j < GameBoard.HEIGHT; j++)
-			{
-				if(tilesFixed.containsKey(new Position(i, j)))
-				{
-					gameBoard[i][j] = tilesFixed.get(new Position(i, j));
-				}
-				else
-				{
-					// Insérer dans le gameboard: 1 tile aléatoire dans tilesMovable avec une rotation aléatoire
-					
-				}
-			}
-		}
 	}
 
 	/**
