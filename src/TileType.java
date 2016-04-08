@@ -6,9 +6,9 @@
  */
 public enum TileType
 {
-	TILET("T"),
-	TILEI("I"),
-	TILEL("L");
+	T("T"),
+	I("I"),
+	L("L");
 	
 	private final String tileType;
 	

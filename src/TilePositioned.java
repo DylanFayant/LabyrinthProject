@@ -4,20 +4,20 @@
  * @author Rachid Taghat - Dylan Fayant
  *
  */
-public class TilePositioned
+public abstract class TilePositioned
 {
 	/**
 	 * a tile 
 	 */
-	private final Tile tile;
+	protected final Tile tile;
 	/**
 	 * a rotation
 	 */
-	private Rotation rotation;
+	protected Rotation rotation;
 	/**
 	 * the tile's position is fixed
 	 */
-	private final boolean fixed;
+	protected final boolean fixed;
 	
 	/**
 	 * Generates a tile positioned in the game board 
@@ -25,11 +25,25 @@ public class TilePositioned
 	 * @param rotation2 a rotation
 	 * @param fixed0 true if the tile's position is fixed
 	 */
-	public TilePositioned(Tile tile0, Rotation rotation2, boolean fixed0)
+	protected TilePositioned(Tile tile0, Rotation rotation2, boolean fixed0)
 	{
 		this.tile = tile0;
 		this.rotation = rotation2;
 		this.fixed = fixed0;
 	}
-	
+
+	public Tile getTile()
+	{
+		return this.tile;
+	}
+
+	public Rotation getRotation()
+	{
+		return this.rotation;
+	}
+
+	public boolean isFixed()
+	{
+		return this.fixed;
+	}
 }
