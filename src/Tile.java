@@ -67,6 +67,11 @@ public enum Tile
 	 */
 	private final Treasure treasure;
 	
+	/**
+	 * Generates a tile with a type and maybe a treasure (null if not)
+	 * @param tileType0 a way of tile
+	 * @param treasure0 a treasure (null if not)
+	 */
 	private Tile(TileType tileType0, Treasure treasure0)
 	{
 		this.tileType = tileType0;

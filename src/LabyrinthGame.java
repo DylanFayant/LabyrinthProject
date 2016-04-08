@@ -28,7 +28,7 @@ public class LabyrinthGame {
 	private Player currentPlayer;
 	
 	/** 
-	 * Is the game over ?.
+	 * Is the game over ?
 	 */
 	private boolean gameIsOver;
 
@@ -36,8 +36,8 @@ public class LabyrinthGame {
 	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
 	 * linked to players in the gameboard's corners. Treasure cards have been distributed to players).
 	 */
-	public LabyrinthGame() {		
-		
+	public LabyrinthGame()
+	{		
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		
 		this.gameboard = new GameBoard(); 
@@ -47,23 +47,22 @@ public class LabyrinthGame {
 		 */
 		TreasureStack allTreasures = new TreasureStack(Treasure.values());
 		allTreasures.shuffle();
-		TreasureStack treasureStacks[] = new TreasureStack[LabyrinthGame.DEFAULT_PLAYERS_COUNT]; 
 		
 		for(int i = 0; i < LabyrinthGame.DEFAULT_PLAYERS_COUNT; i++)
 		{
-			treasureStacks[i] = new TreasureStack();
+			TreasureStack playerTreasureStack = new TreasureStack();
 			
 			for(int j = 0; j < TreasureStack.DEFAULT_PLAYER_STACK_SIZE; j++)
 			{
 				try {
-					treasureStacks[i].setTreasure(allTreasures.pickTreasure());
+					playerTreasureStack.setTreasure(allTreasures.pickTreasure());
 				} catch (StackIsFullException e) {
 					// never gone
 				} catch (StackIsEmptyException e) {
 					// never gone
 				}
 			}
-			this.players[i] = new Player(treasureStacks[i]);
+			this.players[i] = new Player(playerTreasureStack);
 		}
 		
 		this.gameIsOver = false;
@@ -85,7 +84,8 @@ public class LabyrinthGame {
 	 *    current player changes
 	 * 
 	 */
-	public void play() {
+	public void play()
+	{
 		int playerPointer = 0;
 		
 		while(!this.gameIsOver)
@@ -112,8 +112,7 @@ public class LabyrinthGame {
 				}
 			}
 			
-			
-			Move newMove = null;
+			Position newMove = null;
 			while(true)
 			{
 				newMove = this.currentPlayer.askMove();
@@ -128,7 +127,7 @@ public class LabyrinthGame {
 				}
 			}
 			
-			// TODO  make the system of win 
+			// TODO  make the system of winning the play
 			this.gameIsOver = true;
 		}
 	}

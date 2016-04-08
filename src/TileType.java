@@ -10,8 +10,15 @@ public enum TileType
 	I("I"),
 	L("L");
 	
+	/**
+	 * The way created by the tile described in a letter
+	 */
 	private final String tileType;
 	
+	/**
+	 * Generates a type of tile 
+	 * @param tileType0 tile's type
+	 */
 	private TileType(String tileType0)
 	{
 		this.tileType = tileType0;

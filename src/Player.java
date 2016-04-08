@@ -51,7 +51,7 @@ public class Player {
 	 * Ask the player a move.
 	 * @return Move, a move (position)
 	 */
-	public Move askMove()
+	public Position askMove()
 	{
 		return null;
 	}

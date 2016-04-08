@@ -1,6 +1,10 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
+
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import Exceptions.InvalidInsertionException;
 import Exceptions.InvalidMoveException;
@@ -107,6 +111,31 @@ public class GameBoard {
 		tilesMovable.add(new TilePositionedMovable(Tile.TILE46, Rotation.ROTATION1));
 		tilesMovable.add(new TilePositionedMovable(Tile.TILE48, Rotation.ROTATION1));
 		
+		Collections.shuffle(tilesMovable);
+		Rotation[] theRotations = Rotation.values();
+		
+		for(int i = 0; i < GameBoard.WIDTH; i++)
+		{
+			for(int j = 0; j < GameBoard.HEIGHT; j++)
+			{
+				if(tilesFixed.containsKey(new Position(j, i)))
+				{
+					gameBoard[j][i] = tilesFixed.get(new Position(j, i));
+				}
+				else
+				{
+					Rotation aRotation = theRotations[(int)(Math.random()*theRotations.length)];
+					TilePositionedMovable aTile = tilesMovable.removeFirst();
+					aTile.setRotation(aRotation);
+					gameBoard[j][i] = aTile;
+				}
+				System.out.print(gameBoard[j][i].toString());
+			}
+			System.out.println();
+			// TODO : verify
+		}
+		
+		// TODO : place the pawns
 	}
 
 	/**
@@ -122,7 +151,7 @@ public class GameBoard {
 	 * Process the player's moving.
 	 * @param newMove a move.
 	 */
-	public void processMoving(Move newMove) throws InvalidMoveException
+	public void processMoving(Position newMove) throws InvalidMoveException
 	{
 		
 	}

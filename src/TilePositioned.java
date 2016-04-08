@@ -32,18 +32,35 @@ public abstract class TilePositioned
 		this.fixed = fixed0;
 	}
 
+	/**
+	 * Gives the tile represented in the current tile positioned
+	 * @return Tile
+	 */
 	public Tile getTile()
 	{
 		return this.tile;
 	}
 
+	/**
+	 * Gives the rotation of the current tile positioned
+	 * @return Rotation
+	 */
 	public Rotation getRotation()
 	{
 		return this.rotation;
 	}
 
+	/**
+	 * Returns true if the tile is fixed and false if it's not
+	 * @return boolean
+	 */
 	public boolean isFixed()
 	{
 		return this.fixed;
+	}
+	
+	public String toString()
+	{
+		return "["+this.tile.getTreasure()+" | "+this.tile.getTileType().getTileType()+" | "+this.fixed+" | "+this.rotation+"]";
 	}
 }

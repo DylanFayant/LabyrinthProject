@@ -2,19 +2,19 @@ import java.util.Arrays;
 
 import Exceptions.*;
 /**
- * This class represent a deck of treasures.
- * A deck is a stack of treasures put in a given order and that can be picked one by one.
+ * This class represent a stack of treasures.
+ * A stack of treasures put in a given order and that can be picked one by one by the top.
  * @author Rachid Taghat - Dylan Fayant
  */
 
 public class TreasureStack {
 	/**
-	 * default stack size setted to a player.
+	 * default stack size for a player.
 	 */
 	public final static int DEFAULT_PLAYER_STACK_SIZE = 6;
 	
 	/**
-	 * maximum of treasures in a stack.
+	 * maximum of treasures in a stack. (the common stack)
 	 */
 	public final static int MAX_STACK_SIZE = 24;
 	
@@ -29,7 +29,7 @@ public class TreasureStack {
 	private int stackSize;
 	
 	/**
-	 * Generate an empty stack
+	 * Generates an empty stack (the common stack in the game generation)
 	 */
 	public TreasureStack()
 	{
@@ -49,9 +49,9 @@ public class TreasureStack {
 	}
 	
 	/**
-	 * Pick a treasure
-	 * @return Treasures, the next treasure in the top of the deck
-	 * @throws StackIsEmptyException, the deck is empty
+	 * Picks a treasure and removes it from the stack.
+	 * @return Treasures the next treasure in the top of the deck
+	 * @throws StackIsEmptyException the deck is empty
 	 */
 	public Treasure pickTreasure() throws StackIsEmptyException
 	{
@@ -61,9 +61,9 @@ public class TreasureStack {
 	}
 	
 	/**
-	 * Add a new treasure card to the deck
+	 * Adds a new treasure card to the deck
 	 * @param treasure a treasure card
-	 * @throws StackIsFullException, the deck is full
+	 * @throws StackIsFullException the deck is full
 	 */
 	public void setTreasure(Treasure treasure) throws StackIsFullException
 	{

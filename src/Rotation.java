@@ -11,6 +11,9 @@ public enum Rotation
 	ROTATION3(180),
 	ROTATION4(270);
 	
+	/**
+	 * The rotation in degree of the tile (0 = the tile is in the position of the letter T or I or L)
+	 */
 	private int rotation;
 	
 	/**
