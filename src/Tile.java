@@ -77,22 +77,13 @@ public enum Tile
 		this.tileType = tileType0;
 		this.treasure = treasure0;
 	}
-
+	
 	/**
-	 * Returns the tile's type (the way)
-	 * @return tileType
+	 * @see java.lang.Enum#toString()
 	 */
-	public TileType getTileType()
+	public String toString()
 	{
-		return this.tileType;
+		return this.treasure+" | "+this.tileType;
 	}
-
-	/**
-	 * Returns the treasure in the tile (null if no treasure)
-	 * @return treasure
-	 */
-	public Treasure getTreasure()
-	{
-		return this.treasure;
-	}
+	
 }

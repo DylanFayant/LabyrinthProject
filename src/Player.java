@@ -56,4 +56,36 @@ public class Player {
 		return null;
 	}
 
+	/**
+	 * Redefine the hashCode Method
+	 * @return int hashCode
+	 */
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + this.id;
+		return result;
+	}
+
+	/**
+	 * Redefine the equals Method
+	 * @return boolean the objects are equals or not
+	 */
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (this.id != other.id)
+			return false;
+		return true;
+	}
+	
+	
+
 }

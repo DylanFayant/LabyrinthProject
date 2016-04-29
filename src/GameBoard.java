@@ -1,10 +1,7 @@
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.TreeMap;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
+import java.util.Map;
 
 import Exceptions.InvalidInsertionException;
 import Exceptions.InvalidMoveException;
@@ -30,6 +27,11 @@ public class GameBoard {
 	 * Table containing the tiles
 	 */
 	TilePositioned[][] gameBoard;
+	
+	/**
+	 * HashMap containing the players pawns
+	 */
+	Map<Player, Position> pawns = new HashMap<Player, Position>();
 	
 	/**
 	 * Creates and generates a HashMap who contains all the tiles fixed and their positions
@@ -64,11 +66,11 @@ public class GameBoard {
 	
 	/**
 	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
+	 * @param players The players list
 	 */
-	public GameBoard() {
-		gameBoard = new TilePositioned[GameBoard.WIDTH][GameBoard.HEIGHT];
+	public GameBoard(Player players[]) {
+		this.gameBoard = new TilePositioned[GameBoard.WIDTH][GameBoard.HEIGHT];
 		
-		// Generates the list who contains all the movable tiles
 		LinkedList<TilePositionedMovable> tilesMovable = new LinkedList<TilePositionedMovable>();
 		
 		tilesMovable.add(new TilePositionedMovable(Tile.TILE2, Rotation.ROTATION1));
@@ -120,36 +122,129 @@ public class GameBoard {
 			{
 				if(tilesFixed.containsKey(new Position(j, i)))
 				{
-					gameBoard[j][i] = tilesFixed.get(new Position(j, i));
+					this.gameBoard[j][i] = tilesFixed.get(new Position(j, i));
 				}
 				else
 				{
 					Rotation aRotation = theRotations[(int)(Math.random()*theRotations.length)];
 					TilePositionedMovable aTile = tilesMovable.removeFirst();
 					aTile.setRotation(aRotation);
-					gameBoard[j][i] = aTile;
+					this.gameBoard[j][i] = aTile;
 				}
-				System.out.print(gameBoard[j][i].toString());
+				System.out.print(this.gameBoard[j][i].toString());
 			}
 			System.out.println();
-			// TODO : verify
 		}
 		
-		// TODO : place the pawns
+		// save the pawns positions
+		this.pawns.put(players[0], new Position(0,0));
+		this.pawns.put(players[1], new Position(0,GameBoard.WIDTH));
+		this.pawns.put(players[2], new Position(GameBoard.HEIGHT,0));
+		this.pawns.put(players[3], new Position(GameBoard.HEIGHT,GameBoard.WIDTH));
 	}
 
 	/**
 	 * Process the insertion into the gameboard.
 	 * @param newInsertion an insertion
+	 * @throws InvalidInsertionException 
 	 */
 	public void processInsertion(Insertion newInsertion) throws InvalidInsertionException
 	{
+		// The insertion must be in the border of the map
+		if(newInsertion.getaPosition().getX() != 0 && 
+				   newInsertion.getaPosition().getX() != GameBoard.WIDTH-1 &&
+				   newInsertion.getaPosition().getY() != 0 && 
+				   newInsertion.getaPosition().getY() != GameBoard.HEIGHT-1) throw new InvalidInsertionException();
 		
+		// The insertion must be in the map
+		if(newInsertion.getaPosition().getX() < 0 && 
+				   newInsertion.getaPosition().getX() >= GameBoard.WIDTH &&
+				   newInsertion.getaPosition().getY() < 0 && 
+				   newInsertion.getaPosition().getY() >= GameBoard.HEIGHT) throw new InvalidInsertionException();
+		
+		// The insertion must be in a tile movable
+		if(this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()].isFixed()) throw new InvalidInsertionException();
+		
+		this.freeTile = this.slideForInsertion(newInsertion, this.freeTile);
+	}
+	
+	/**
+	 * Slides the tiles in the table for an insertion
+	 * @param insertion an Insertion (Position, Rotation)
+	 * @param freeTile the old free tile
+	 * @return the tile the new free tile
+	 */
+	private Tile slideForInsertion(Insertion newInsertion, Tile freeTile)
+	{
+		Tile exitTile = null;
+		
+		if(newInsertion.getaPosition().getX() == GameBoard.WIDTH-1 || newInsertion.getaPosition().getX() == 0)
+		{
+			exitTile = this.lineSlideForInsertion(newInsertion, freeTile);
+		} 
+		else if(newInsertion.getaPosition().getY() == GameBoard.HEIGHT-1 || newInsertion.getaPosition().getY() == 0)
+		{
+			exitTile = this.columnSlideForInsertion(newInsertion, freeTile);
+		}
+		
+		// Process the insertion of the free tile
+		this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()] = new TilePositionedMovable(freeTile, newInsertion.getaRotation());	
+
+		return exitTile;
+	}
+	
+	private Tile lineSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	{
+		if(newInsertion.getaPosition().getX() == GameBoard.WIDTH-1)
+		{
+			this.rightLineSlideForInsertion(newInsertion, freeTile);
+		} 
+		else if(newInsertion.getaPosition().getX() == 0)
+		{
+			this.leftLineSlideForInsertion(newInsertion, freeTile);
+		} 
+	}
+	
+	private Tile leftLineSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	{
+		for(int i = GameBoard.WIDTH-2; i >= 0; i--)
+		{
+			this.gameBoard[i+1][newInsertion.getaPosition().getY()] = this.gameBoard[i][newInsertion.getaPosition().getY()];
+		}
+	}
+	
+	private Tile rightLineSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	{
+		for(int i = 1; i < GameBoard.WIDTH; i++)
+		{
+			this.gameBoard[i-1][newInsertion.getaPosition().getY()] = this.gameBoard[i][newInsertion.getaPosition().getY()];
+		}
+	}
+	
+	private Tile columnSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	{
+		if(newInsertion.getaPosition().getY() == GameBoard.HEIGHT-1)
+		{
+			for(int i = GameBoard.WIDTH-2; i >= 0; i--)
+			{
+				this.gameBoard[i+1][newInsertion.getaPosition().getY()] = this.gameBoard[i][newInsertion.getaPosition().getY()];
+			}
+		} 
+		else if(newInsertion.getaPosition().getY() == 0)
+		{
+			for(int i = 0; i < GameBoard.HEIGHT; i++)
+			{
+			
+			}
+		}
+		// Process the insertion of the free tile
+		this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()] = new TilePositionedMovable(tileToPosition, newInsertion.getaRotation());
 	}
 
 	/**
 	 * Process the player's moving.
 	 * @param newMove a move.
+	 * @throws InvalidMoveException 
 	 */
 	public void processMoving(Position newMove) throws InvalidMoveException
 	{

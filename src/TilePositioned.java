@@ -9,7 +9,7 @@ public abstract class TilePositioned
 	/**
 	 * a tile 
 	 */
-	protected final Tile tile;
+	private final Tile tile;
 	/**
 	 * a rotation
 	 */
@@ -17,7 +17,7 @@ public abstract class TilePositioned
 	/**
 	 * the tile's position is fixed
 	 */
-	protected final boolean fixed;
+	private final boolean fixed;
 	
 	/**
 	 * Generates a tile positioned in the game board 
@@ -61,6 +61,6 @@ public abstract class TilePositioned
 	
 	public String toString()
 	{
-		return "["+this.tile.getTreasure()+" | "+this.tile.getTileType().getTileType()+" | "+this.fixed+" | "+this.rotation+"]";
+		return "["+this.tile+" | "+this.fixed+" | "+this.rotation+"]";
 	}
 }

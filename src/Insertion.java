@@ -32,7 +32,7 @@ public class Insertion
 	 * @return position
 	 */
 	public Position getaPosition() {
-		return aPosition;
+		return this.aPosition;
 	}
 
 	/**
@@ -40,6 +40,6 @@ public class Insertion
 	 * @return rotation
 	 */
 	public Rotation getaRotation() {
-		return aRotation;
+		return this.aRotation;
 	}
 }

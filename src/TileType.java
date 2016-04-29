@@ -13,23 +13,23 @@ public enum TileType
 	/**
 	 * The way created by the tile described in a letter
 	 */
-	private final String tileType;
+	private final String tileString;
 	
 	/**
 	 * Generates a type of tile 
-	 * @param tileType0 tile's type
+	 * @param tileString tile's type
 	 */
-	private TileType(String tileType0)
+	private TileType(String tileString)
 	{
-		this.tileType = tileType0;
+		this.tileString = tileString;
 	}
 
+
 	/**
-	 * Returns the tile's type (the way)
-	 * @return tileType
+	 * @see java.lang.Enum#toString()
 	 */
-	public String getTileType()
+	public String toString()
 	{
-		return this.tileType;
+		return this.tileString;
 	}
 }

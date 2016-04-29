@@ -40,7 +40,7 @@ public class LabyrinthGame {
 	{		
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		
-		this.gameboard = new GameBoard(); 
+		this.gameboard = new GameBoard(players); 
 	
 		/*
 		 * Players' treasure stack generation.
