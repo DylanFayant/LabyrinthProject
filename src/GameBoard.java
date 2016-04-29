@@ -289,5 +289,19 @@ public class GameBoard {
 	{
 		// TODO
 	}
+	
+	public String toString()
+	{
+		String aString = "";
+		for(int i = 0; i < GameBoard.WIDTH; i++)
+		{
+			for(int j = 0; j < GameBoard.HEIGHT; j++)
+			{
+				aString += this.gameBoard[j][i].toString();
+			}
+			aString += "\n";
+		}
+		return aString;
+	}
 
 }
