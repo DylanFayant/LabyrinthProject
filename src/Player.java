@@ -44,6 +44,7 @@ public class Player {
 	 */
 	public Insertion askInsertion()
 	{
+		// TODO
 		return null;
 	}
 
@@ -53,12 +54,13 @@ public class Player {
 	 */
 	public Position askMove()
 	{
+		// TODO
 		return null;
 	}
 
+	
 	/**
-	 * Redefine the hashCode Method
-	 * @return int hashCode
+	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode()
 	{
@@ -67,10 +69,9 @@ public class Player {
 		result = prime * result + this.id;
 		return result;
 	}
-
+	
 	/**
-	 * Redefine the equals Method
-	 * @return boolean the objects are equals or not
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object obj)
 	{

@@ -127,7 +127,7 @@ public class LabyrinthGame {
 				}
 			}
 			
-			// TODO  make the system of winning the play
+			// TODO  make the system of finding a treasure + winning the play
 			this.gameIsOver = true;
 		}
 	}

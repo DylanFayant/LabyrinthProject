@@ -3,7 +3,7 @@
  * @author Rachid Taghat - Dylan Fayant
  *
  */
-// TODO (done?) : make this comparable to a HashMap
+// TODO (done) : make this comparable to a HashMap
 public class Position
 {
 	/**
