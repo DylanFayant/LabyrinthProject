@@ -172,73 +172,112 @@ public class GameBoard {
 	 * Slides the tiles in the table for an insertion
 	 * @param insertion an Insertion (Position, Rotation)
 	 * @param freeTile the old free tile
-	 * @return the tile the new free tile
+	 * @return the new free tile
 	 */
 	private Tile slideForInsertion(Insertion newInsertion, Tile freeTile)
 	{
+		/**
+		 * The new Free Tile
+		 */
 		Tile exitTile = null;
 		
 		if(newInsertion.getaPosition().getX() == GameBoard.WIDTH-1 || newInsertion.getaPosition().getX() == 0)
 		{
-			exitTile = this.lineSlideForInsertion(newInsertion, freeTile);
+			exitTile = this.lineSlideForInsertion(newInsertion);
 		} 
 		else if(newInsertion.getaPosition().getY() == GameBoard.HEIGHT-1 || newInsertion.getaPosition().getY() == 0)
 		{
-			exitTile = this.columnSlideForInsertion(newInsertion, freeTile);
+			exitTile = this.columnSlideForInsertion(newInsertion);
 		}
 		
-		// Process the insertion of the free tile
+		// Process the insertion of the old free tile
 		this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()] = new TilePositionedMovable(freeTile, newInsertion.getaRotation());	
 
 		return exitTile;
 	}
 	
-	private Tile lineSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	/**
+	 * Proceed the line' slide for the insertion 
+	 * @param newInsertion the insertion
+	 * @return the new free tile
+	 */
+	private Tile lineSlideForInsertion(Insertion newInsertion)
 	{
-		if(newInsertion.getaPosition().getX() == GameBoard.WIDTH-1)
-		{
-			this.rightLineSlideForInsertion(newInsertion, freeTile);
-		} 
-		else if(newInsertion.getaPosition().getX() == 0)
-		{
-			this.leftLineSlideForInsertion(newInsertion, freeTile);
-		} 
+		if(newInsertion.getaPosition().getX() == 0)
+			return this.leftLineSlideForInsertion(newInsertion);
+		return this.rightLineSlideForInsertion(newInsertion);
 	}
 	
-	private Tile leftLineSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	/**
+	 * Proceed the line' slide from the left for the insertion
+	 * @param newInsertion the insertion
+	 * @return the new free tile
+	 */
+	private Tile leftLineSlideForInsertion(Insertion newInsertion)
 	{
+		Tile newFreeTile = this.gameBoard[GameBoard.WIDTH-1][newInsertion.getaPosition().getY()].getTile();
 		for(int i = GameBoard.WIDTH-2; i >= 0; i--)
 		{
 			this.gameBoard[i+1][newInsertion.getaPosition().getY()] = this.gameBoard[i][newInsertion.getaPosition().getY()];
 		}
+		return newFreeTile;
 	}
 	
-	private Tile rightLineSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	/**
+	 * Proceed the line' slide from the right for the insertion
+	 * @param newInsertion the insertion
+	 * @return the new free tile
+	 */
+	private Tile rightLineSlideForInsertion(Insertion newInsertion)
 	{
+		Tile newFreeTile = this.gameBoard[0][newInsertion.getaPosition().getY()].getTile();
 		for(int i = 1; i < GameBoard.WIDTH; i++)
 		{
 			this.gameBoard[i-1][newInsertion.getaPosition().getY()] = this.gameBoard[i][newInsertion.getaPosition().getY()];
 		}
+		return newFreeTile;
 	}
 	
-	private Tile columnSlideForInsertion(Insertion newInsertion, Tile freeTile)
+	/**
+	 * Proceed the column' slide for the insertion 
+	 * @param newInsertion the insertion
+	 * @return the new free tile
+	 */
+	private Tile columnSlideForInsertion(Insertion newInsertion)
 	{
-		if(newInsertion.getaPosition().getY() == GameBoard.HEIGHT-1)
+		if(newInsertion.getaPosition().getY() == 0)
+			return this.topColumnSlideForInsertion(newInsertion);
+		return this.bottomColumnSlideForInsertion(newInsertion);
+	}
+	
+	/**
+	 * Proceed the column' slide from the top for the insertion
+	 * @param newInsertion the insertion
+	 * @return the new free tile
+	 */
+	private Tile topColumnSlideForInsertion(Insertion newInsertion)
+	{
+		Tile newFreeTile = this.gameBoard[newInsertion.getaPosition().getX()][GameBoard.HEIGHT-1].getTile();
+		for(int i = GameBoard.HEIGHT-2; i >= 0; i--)
 		{
-			for(int i = GameBoard.WIDTH-2; i >= 0; i--)
-			{
-				this.gameBoard[i+1][newInsertion.getaPosition().getY()] = this.gameBoard[i][newInsertion.getaPosition().getY()];
-			}
-		} 
-		else if(newInsertion.getaPosition().getY() == 0)
-		{
-			for(int i = 0; i < GameBoard.HEIGHT; i++)
-			{
-			
-			}
+			this.gameBoard[newInsertion.getaPosition().getX()][i+1] = this.gameBoard[newInsertion.getaPosition().getX()][i];
 		}
-		// Process the insertion of the free tile
-		this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()] = new TilePositionedMovable(tileToPosition, newInsertion.getaRotation());
+		return newFreeTile;
+	}
+	
+	/**
+	 * Proceed the column' slide from the bottom for the insertion
+	 * @param newInsertion the insertion
+	 * @return the new free tile
+	 */
+	private Tile bottomColumnSlideForInsertion(Insertion newInsertion)
+	{
+		Tile newFreeTile = this.gameBoard[newInsertion.getaPosition().getX()][0].getTile();
+		for(int i = 1; i < GameBoard.HEIGHT; i++)
+		{
+			this.gameBoard[newInsertion.getaPosition().getX()][i-1] = this.gameBoard[newInsertion.getaPosition().getX()][i];
+		}
+		return newFreeTile;
 	}
 
 	/**
@@ -248,7 +287,7 @@ public class GameBoard {
 	 */
 	public void processMoving(Position newMove) throws InvalidMoveException
 	{
-		
+		// TODO
 	}
 
 }
