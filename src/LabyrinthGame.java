@@ -117,7 +117,7 @@ public class LabyrinthGame {
 				newMove = currentPlayer.askMove();
 				try
 				{
-					this.gameboard.processMoving(newMove);
+					this.gameboard.processMoving(newMove, currentPlayer.getId());
 					break;
 				}
 				catch(InvalidMoveException e)

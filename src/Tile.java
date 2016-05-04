@@ -79,6 +79,11 @@ public enum Tile
 		this.treasure = treasure0;
 	}
 	
+	public TileType getTileType()
+	{
+		return this.tileType;
+	}
+	
 	/**
 	 * @see java.lang.Enum#toString()
 	 */

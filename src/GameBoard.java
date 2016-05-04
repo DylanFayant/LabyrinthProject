@@ -311,20 +311,102 @@ public class GameBoard {
 	/**
 	 * Process the player's moving.
 	 * @param newMove a move.
+	 * @param playerId 
 	 * @throws InvalidMoveException 
 	 */
-	public void processMoving(Movement newMove) throws InvalidMoveException
+	public void processMoving(Movement newMove, int playerId) throws InvalidMoveException
 	{
 		/*
 		 * We have a list of moves
 		 * We must verify each move if they are possible
 		 * if they are not possible => InvalidMoveException
-		 * if they are possible => Moves to the last positon of the Movement 
+		 * if they are possible => Moves to the last position of the Movement 
 		 */
-
-		// TODO
+		Iterator<PositionInTheGameBoard> move = newMove.getMovement().iterator();
+		PositionInTheGameBoard x = move.next();
+		while(move.hasNext())
+		{
+			PositionInTheGameBoard previousPosition = x;
+			PositionInTheGameBoard nextPosition = move.next();
+			if(!this.moveIsValid(previousPosition, nextPosition)) throw new InvalidMoveException();
+			x = nextPosition;
+		}
+		this.pawns.replace(playerId, newMove.getMovement().get(newMove.getMovement().size()-1));
 	}
 	
+	/**
+	 * Check if the move is valid
+	 * @param previousPosition PositionInTheGameBoard
+	 * @param nextPosition PositionInTheGameBoard
+	 * @return boolean
+	 */
+	private boolean moveIsValid(PositionInTheGameBoard previousPosition, PositionInTheGameBoard nextPosition) {
+		TilePositioned previousTilePositioned = this.gameBoard[previousPosition.getX()][previousPosition.getY()];
+		
+		int xMove = nextPosition.getX()-previousPosition.getX();
+		int yMove = nextPosition.getY()-previousPosition.getY();
+		
+		Rotation previousTileRotation = previousTilePositioned.getRotation();
+		Tile previousTile = previousTilePositioned.getTile();
+		
+		boolean moveIsValid = false;
+		
+		if(xMove == 1)
+			moveIsValid = this.rightMove(previousTile, previousTileRotation);
+		if(xMove == -1)
+			moveIsValid = this.leftMove(previousTile, previousTileRotation);
+		if(yMove == 1)
+			moveIsValid = this.downMove(previousTile, previousTileRotation);
+		if(yMove == -1)
+			moveIsValid = this.upMove(previousTile, previousTileRotation);
+		
+		return moveIsValid;
+	}
+	
+	/**
+	 * 
+	 * @param previousTile
+	 * @param previousTileRotation
+	 * @return
+	 */
+	private boolean upMove(Tile previousTile, Rotation previousTileRotation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param previousTile
+	 * @param previousTileRotation
+	 * @return
+	 */
+	private boolean downMove(Tile previousTile, Rotation previousTileRotation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param previousTile
+	 * @param previousTileRotation
+	 * @return
+	 */
+	private boolean leftMove(Tile previousTile, Rotation previousTileRotation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param previousTile
+	 * @param previousTileRotation
+	 * @return
+	 */
+	private boolean rightMove(Tile previousTile, Rotation previousTileRotation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	/**
 	 * @see java.lang.Object#toString()
 	 */
