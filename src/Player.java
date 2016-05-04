@@ -71,15 +71,19 @@ public class Player {
 	public Movement askMove(Movement aMove)
 	{
 		Direction[] directions = Direction.values();
-		while(true)
+		int random = new Random().nextInt(4);
+		while(aMove.getMovement().size() < random)
 		{
-			try {
-				aMove.nextMove(directions[new Random().nextInt(directions.length)]);
-				break;
-			} catch (XisNotInGameboardException e) {
-				// make a loop
-			} catch (YisNotInGameboardException e) {
-				// make a loop
+			while(true)
+			{
+				try {
+					aMove.nextMove(directions[new Random().nextInt(directions.length)]);
+					break;
+				} catch (XisNotInGameboardException e) {
+					// make a loop
+				} catch (YisNotInGameboardException e) {
+					// make a loop
+				}
 			}
 		}
 		return aMove;
