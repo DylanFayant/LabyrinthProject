@@ -43,8 +43,8 @@ public class Player {
 	 */
 	public Insertion askInsertion()
 	{
-		// TODO
-		return null;
+		// Random insertion
+		return new Insertion();
 	}
 
 	/**
@@ -53,10 +53,17 @@ public class Player {
 	 */
 	public Movement askMove()
 	{
-		// TODO
+		// TODO : Random move
 		return null;
 	}
 
+	/**
+	 * Get the player's treasure stack
+	 * @return treasureStack
+	 */
+	public TreasureStack getTreasureStack() {
+		return this.treasureStack;
+	}
 	
 	/**
 	 * @see java.lang.Object#hashCode()
@@ -85,7 +92,4 @@ public class Player {
 			return false;
 		return true;
 	}
-	
-	
-
 }

@@ -89,8 +89,7 @@ public class TreasureStack {
 	}
 	
 	/**
-	 * Return a deck's description
-	 * @return String, the deck description
+	 * @see java.lang.Object#toString()
 	 */
 	public String toString()
 	{

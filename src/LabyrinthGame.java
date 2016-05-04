@@ -53,11 +53,13 @@ public class LabyrinthGame {
 			this.players[i] = new Player(playerTreasureStack);
 		}
 		
+		// Make an array of all the players id's
 		int playersId[] = new int[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		for(int i = 0; i < LabyrinthGame.DEFAULT_PLAYERS_COUNT; i++)
 		{
 			playersId[i] = players[i].getId();
 		}
+		// Generates the gameboard (with players id to link them to they pawns)
 		this.gameboard = new GameBoard(playersId); 
 	}
 	
@@ -74,11 +76,16 @@ public class LabyrinthGame {
 	 *      <ask current player for move>
 	 *    while (<move is not valid>)
 	 *    <perform move>
+	 *    if (<player is on a tile containing the treasure he is looking for>)
+	 *    	<delete the treasure card from player stack>
+	 *    if(<player stack is empty>)
+	 *    	<game is over>
 	 *    current player changes
 	 * 
 	 */
 	public void play()
 	{
+		// Initialization
 		Player currentPlayer;
 		boolean gameIsOver = false;
 		int playerPointer = 0;
@@ -87,7 +94,6 @@ public class LabyrinthGame {
 		{
 			currentPlayer = this.players[playerPointer];
 			
-			// TODO (done) use modulus (%)
 			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 			
 			Insertion newInsertion = null;
@@ -99,8 +105,6 @@ public class LabyrinthGame {
 					this.gameboard.processInsertion(newInsertion);
 					break;
 				}
-				// TODO (done) isInsertionValid should not raise an exception in that case
-				// (ask for advice)
 				catch(InvalidInsertionException e)
 				{
 					// make the loop

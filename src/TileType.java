@@ -6,8 +6,17 @@
  */
 public enum TileType
 {
+	/**
+	 * A tile with a T shape
+	 */
 	T("T"),
+	/**
+	 * A tile with a I shape
+	 */
 	I("I"),
+	/**
+	 * A tile with a L shape
+	 */
 	L("L");
 	
 	/**
@@ -23,7 +32,6 @@ public enum TileType
 	{
 		this.tileString = tileString;
 	}
-
 
 	/**
 	 * @see java.lang.Enum#toString()

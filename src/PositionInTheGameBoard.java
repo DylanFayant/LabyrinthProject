@@ -4,20 +4,19 @@ import Exceptions.XisNotInGameboardException;
 import Exceptions.YisNotInGameboardException;
 
 /**
- * representes a position 2D
+ * Represents a 2D position
  * @author Rachid Taghat - Dylan Fayant
  *
  */
-// TODO (done) : make this comparable to a HashMap
 public class PositionInTheGameBoard
 {
 	/**
-	 * max width 
+	 * gameboard max width 
 	 */
 	private final static int max_X = GameBoard.WIDTH;
 	
 	/**
-	 * max height
+	 * gameboard max height
 	 */
 	private final static int max_Y = GameBoard.HEIGHT;
 	
@@ -32,7 +31,7 @@ public class PositionInTheGameBoard
 	private final int Y;
 	
 	/**
-	 * generates a position
+	 * generates a position in the gameboard
 	 * @param x coordinate
 	 * @param y coordinate
 	 * @throws XisNotInGameboardException 
@@ -47,7 +46,7 @@ public class PositionInTheGameBoard
 	}
 	
 	/**
-	 * generates a randomposition
+	 * generates a random position in the gameboard
 	 */
 	public PositionInTheGameBoard()
 	{
@@ -74,9 +73,9 @@ public class PositionInTheGameBoard
 	}
 	
 	/**
-	 * TODO
-	 * @param direction
-	 * @return
+	 * Returns the next position to a given direction for the current position
+	 * @param direction Direction
+	 * @return the next position 
 	 * @throws YisNotInGameboardException 
 	 * @throws XisNotInGameboardException 
 	 */
@@ -86,8 +85,7 @@ public class PositionInTheGameBoard
 	}
 	
 	/**
-	 * Checks if the object comparated is equal to the current object
-	 * @return boolean 
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object o)
 	{
@@ -104,8 +102,7 @@ public class PositionInTheGameBoard
 	}
 	
 	/**
-	 * Returns the only hash code (auto-generated)
-	 * @return int
+	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
 		final int prime = 31;

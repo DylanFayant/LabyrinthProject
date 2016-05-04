@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class GameBoard {
 	/**
 	 * HashMap containing the players pawns
 	 */
-	Map<Integer, PositionInTheGameBoard> pawns = new HashMap<Integer, PositionInTheGameBoard>();
+	Map<Integer, PositionInTheGameBoard> pawns;
 	
 	/**
 	 * Creates and generates a HashMap who contains all the tiles fixed and their positions
@@ -71,15 +72,20 @@ public class GameBoard {
 	/**
 	 * The free tile (not in game)
 	 */
-	private Tile freeTile = Tile.TILE50;
+	private Tile freeTile;
 	
 	/**
 	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
+	 * @param playersId the players ids
 	 * @param players The players list
 	 */
 	public GameBoard(int playersId[]) {
+		// Initialization 
+		this.pawns = new HashMap<Integer, PositionInTheGameBoard>();
 		this.gameBoard = new TilePositioned[GameBoard.WIDTH][GameBoard.HEIGHT];
+		this.freeTile = Tile.TILE50;
 		
+		// Make the list of the movable tiles
 		LinkedList<TilePositionedMovable> tilesMovable = new LinkedList<TilePositionedMovable>();
 		
 		tilesMovable.add(new TilePositionedMovable(Tile.TILE2, Rotation.ROTATION1));
@@ -125,6 +131,7 @@ public class GameBoard {
 		Collections.shuffle(tilesMovable);
 		Rotation[] theRotations = Rotation.values();
 		
+		// For all the cells in the array, we put the good tile
 		for(int i = 0; i < GameBoard.WIDTH; i++)
 		{
 			for(int j = 0; j < GameBoard.HEIGHT; j++)
@@ -147,9 +154,7 @@ public class GameBoard {
 				{
 					// never happens
 				}
-				System.out.print(this.gameBoard[j][i].toString());
 			}
-			System.out.println();
 		}
 		
 		// save the pawns positions
@@ -188,7 +193,7 @@ public class GameBoard {
 		// The insertion must be in a tile movable
 		if(this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()].isFixed()) throw new InvalidInsertionException();
 		
-		this.freeTile = this.slideForInsertion(newInsertion, this.freeTile);
+		this.freeTile = this.slidesAndInsert(newInsertion, this.freeTile);
 	}
 	
 	/**
@@ -197,7 +202,7 @@ public class GameBoard {
 	 * @param freeTile the old free tile
 	 * @return the new free tile
 	 */
-	private Tile slideForInsertion(Insertion newInsertion, Tile freeTile)
+	private Tile slidesAndInsert(Insertion newInsertion, Tile freeTile)
 	{
 		/**
 		 * The new Free Tile
@@ -310,9 +315,19 @@ public class GameBoard {
 	 */
 	public void processMoving(Movement newMove) throws InvalidMoveException
 	{
+		/*
+		 * We have a list of moves
+		 * We must verify each move if they are possible
+		 * if they are not possible => InvalidMoveException
+		 * if they are possible => Moves to the last positon of the Movement 
+		 */
+
 		// TODO
 	}
 	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString()
 	{
 		String aString = "";

@@ -59,6 +59,9 @@ public abstract class TilePositioned
 		return this.fixed;
 	}
 	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString()
 	{
 		return "["+this.tile+" | "+this.fixed+" | "+this.rotation+"]";

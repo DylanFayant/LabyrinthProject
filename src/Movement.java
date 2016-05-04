@@ -1,4 +1,3 @@
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -6,41 +5,47 @@ import Exceptions.XisNotInGameboardException;
 import Exceptions.YisNotInGameboardException;
 
 /**
- * 
+ * Represents a movement
+ * It's a list of linked positions
  * @author Rachid Taghat - Dylan Fayant			
  *
  */
 public class Movement
 {
-	private List<PositionInTheGameBoard> aMovement;
+	/**
+	 * A list of all the positions
+	 */
+	private List<PositionInTheGameBoard> movement;
 	
 	/**
-	 * @param position
+	 * Generates the movement with an initial position
+	 * @param position (the current pawn's position)
 	 */
 	public Movement(PositionInTheGameBoard position)
 	{
-		aMovement = new LinkedList<PositionInTheGameBoard>();
-		this.aMovement.add(position);
+		movement = new LinkedList<PositionInTheGameBoard>();
+		this.movement.add(position);
 	}
 	
 	/**
+	 * Get the movement
+	 * @return movement
+	 */
+	public List<PositionInTheGameBoard> getMovement()
+	{
+		return this.movement;
+	}
+	
+	/**
+	 * Add the next move (linked to the next move)
 	 * @param direction 
 	 * @throws YisNotInGameboardException 
 	 * @throws XisNotInGameboardException 
 	 */
 	public void nextMove(Direction direction) throws XisNotInGameboardException, YisNotInGameboardException
 	{
-		PositionInTheGameBoard previousPosition = this.aMovement.get(aMovement.size()-1);
-		PositionInTheGameBoard newPosition = null;
-		if(direction == Direction.UP)
-			newPosition = new PositionInTheGameBoard(previousPosition.getX(), previousPosition.getY()-1);
-		else if(direction == Direction.DOWN)
-			newPosition = new PositionInTheGameBoard(previousPosition.getX(), previousPosition.getY()+1);
-		else if(direction == Direction.RIGHT)
-			newPosition = new PositionInTheGameBoard(previousPosition.getX()+1, previousPosition.getY());
-		else if(direction == Direction.LEFT)
-			newPosition = new PositionInTheGameBoard(previousPosition.getX()-1, previousPosition.getY());
-		this.aMovement.add(newPosition);
+		PositionInTheGameBoard previousPosition = this.movement.get(movement.size()-1);
+		this.movement.add(previousPosition.nextPosition(direction));
 	}
 	
 }

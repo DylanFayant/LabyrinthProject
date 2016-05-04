@@ -6,6 +6,7 @@ import java.util.Random;
  * @author Rachid Taghat - Dylan Fayant
  *
  */
+@SuppressWarnings("javadoc")
 public enum Rotation
 {
 	ROTATION1(0),

@@ -4,6 +4,7 @@
  * @author Rachid Taghat - Dylan Fayant
  *
  */
+@SuppressWarnings("javadoc")
 public enum Treasure
 {
 	KEY,
