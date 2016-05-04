@@ -111,9 +111,9 @@ public class LabyrinthGame {
 				}
 			}
 			
-			Movement newMove = new Movement(this.gameboard.pawns.get(0));
 			while(true)
 			{
+				Movement newMove = new Movement(this.gameboard.pawns.get(currentPlayer.getId()));
 				Movement theMove = currentPlayer.askMove(newMove);
 				try
 				{
