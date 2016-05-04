@@ -35,8 +35,8 @@ public class Player {
 	 * @param treasureStack 
 	 */
 	public Player(TreasureStack treasureStack) {
-		Player.currentMaxId++;
 		this.id = currentMaxId;
+		Player.currentMaxId++;
 		this.treasureStack = treasureStack;
 		try {
 			this.currentTreasure = this.treasureStack.pickTreasure();

@@ -161,9 +161,9 @@ public class GameBoard {
 		try
 		{
 			this.pawns.put(playersId[0], new PositionInTheGameBoard(0,0));
-			this.pawns.put(playersId[1], new PositionInTheGameBoard(0,GameBoard.WIDTH));
-			this.pawns.put(playersId[2], new PositionInTheGameBoard(GameBoard.HEIGHT,0));
-			this.pawns.put(playersId[3], new PositionInTheGameBoard(GameBoard.HEIGHT,GameBoard.WIDTH));
+			this.pawns.put(playersId[1], new PositionInTheGameBoard(0,GameBoard.WIDTH-1));
+			this.pawns.put(playersId[2], new PositionInTheGameBoard(GameBoard.HEIGHT-1,0));
+			this.pawns.put(playersId[3], new PositionInTheGameBoard(GameBoard.HEIGHT-1,GameBoard.WIDTH-1));
 		}
 		catch (XisNotInGameboardException | YisNotInGameboardException e)
 		{
@@ -481,19 +481,8 @@ public class GameBoard {
 		{
 			for(int j = 0; j < GameBoard.HEIGHT; j++)
 			{
-				try {
-					if(this.pawns.containsValue(new PositionInTheGameBoard(j, i)))
 						aString += this.gameBoard[j][i].toString();
-					else
-					{
-						for (Map.Entry<Integer, PositionInTheGameBoard> e : this.pawns.entrySet()) {
-							if(e.getValue() == new PositionInTheGameBoard(j, i))
-								aString += this.gameBoard[j][i].toString(e.getKey());
-						}
-					}
-				} catch (XisNotInGameboardException | YisNotInGameboardException e) {
-					// impossible
-				}
+				
 			}
 			aString += "\n";
 		}

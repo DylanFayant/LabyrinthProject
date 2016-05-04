@@ -54,10 +54,10 @@ public class LabyrinthGame {
 		}
 		
 		// Make an array of all the players id's
-		int playersId[] = new int[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
-		for(int i = 0; i < LabyrinthGame.DEFAULT_PLAYERS_COUNT; i++)
+		int[] playersId = new int[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
+		for(int i = 0; i < playersId.length; i++)
 		{
-			playersId[i] = players[i].getId();
+			playersId[i] = this.players[i].getId();
 		}
 		// Generates the gameboard (with players id to link them to they pawns)
 		this.gameboard = new GameBoard(playersId); 
@@ -111,13 +111,13 @@ public class LabyrinthGame {
 				}
 			}
 			
-			Movement newMove = new Movement(this.gameboard.pawns.get(currentPlayer.getId()));
+			Movement newMove = new Movement(this.gameboard.pawns.get(0));
 			while(true)
 			{
-				newMove = currentPlayer.askMove(newMove);
+				Movement theMove = currentPlayer.askMove(newMove);
 				try
 				{
-					this.gameboard.processMoving(newMove, currentPlayer.getId());
+					this.gameboard.processMoving(theMove, currentPlayer.getId());
 					break;
 				}
 				catch(InvalidMoveException e)
