@@ -9,7 +9,7 @@ public class Insertion
 	/**
 	 * A position of insertion in a border of the map
 	 */
-	private final Position aPosition;
+	private final PositionInTheGameBoard aPosition;
 	
 	/**
 	 * A rotation for the inserted tile
@@ -17,21 +17,32 @@ public class Insertion
 	private final Rotation aRotation;
 	
 	/**
-	 * Generates an insertion with a position (in a valid border of the map) and a rotation
+	 * Generates an insertion with a position and a rotation
 	 * @param position
 	 * @param rotation
 	 */
-	public Insertion(Position position, Rotation rotation)
+	public Insertion(PositionInTheGameBoard position, Rotation rotation)
 	{
 		this.aPosition = position;
 		this.aRotation = rotation;
+	}
+	
+	/**
+	 * Generates a random insertion with a position and a rotation
+	 * @param position
+	 * @param rotation
+	 */
+	public Insertion()
+	{
+		this.aPosition = new PositionInTheGameBoard();
+		this.aRotation = Rotation.getRandomRotation();
 	}
 
 	/**
 	 * Returns the current obect's position
 	 * @return position
 	 */
-	public Position getaPosition() {
+	public PositionInTheGameBoard getaPosition() {
 		return this.aPosition;
 	}
 

@@ -21,16 +21,6 @@ public class LabyrinthGame {
 	 * the players.
 	 */
 	private final Player[] players;
-	
-	/**
-	 * the current player
-	 */
-	private Player currentPlayer;
-	
-	/** 
-	 * Is the game over ?
-	 */
-	private boolean gameIsOver;
 
 	/**
 	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
@@ -39,8 +29,6 @@ public class LabyrinthGame {
 	public LabyrinthGame()
 	{		
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
-		
-		this.gameboard = new GameBoard(players); 
 	
 		/*
 		 * Players' treasure stack generation.
@@ -65,7 +53,12 @@ public class LabyrinthGame {
 			this.players[i] = new Player(playerTreasureStack);
 		}
 		
-		this.gameIsOver = false;
+		int playersId[] = new int[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
+		for(int i = 0; i < LabyrinthGame.DEFAULT_PLAYERS_COUNT; i++)
+		{
+			playersId[i] = players[i].getId();
+		}
+		this.gameboard = new GameBoard(playersId); 
 	}
 	
 	/**
@@ -86,11 +79,13 @@ public class LabyrinthGame {
 	 */
 	public void play()
 	{
+		Player currentPlayer;
+		boolean gameIsOver = false;
 		int playerPointer = 0;
 		
-		while(!this.gameIsOver)
+		while(!gameIsOver)
 		{
-			this.currentPlayer = this.players[playerPointer];
+			currentPlayer = this.players[playerPointer];
 			
 			// TODO (done) use modulus (%)
 			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
@@ -98,7 +93,7 @@ public class LabyrinthGame {
 			Insertion newInsertion = null;
 			while(true)
 			{
-				newInsertion = this.currentPlayer.askInsertion();
+				newInsertion = currentPlayer.askInsertion();
 				try
 				{
 					this.gameboard.processInsertion(newInsertion);
@@ -112,10 +107,10 @@ public class LabyrinthGame {
 				}
 			}
 			
-			Position newMove = null;
+			Movement newMove = null;
 			while(true)
 			{
-				newMove = this.currentPlayer.askMove();
+				newMove = currentPlayer.askMove();
 				try
 				{
 					this.gameboard.processMoving(newMove);
@@ -128,7 +123,7 @@ public class LabyrinthGame {
 			}
 			
 			// TODO  make the system of finding a treasure + winning the play
-			this.gameIsOver = true;
+			gameIsOver = true;
 		}
 	}
 }

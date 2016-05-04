@@ -14,7 +14,6 @@ public class Player {
 	 * The player id, used to identify the player.
 	 */
 	private final int id;
-
 	/** 
 	 * Player's deck
 	 */
@@ -52,7 +51,7 @@ public class Player {
 	 * Ask the player a move.
 	 * @return Move, a move (position)
 	 */
-	public Position askMove()
+	public Movement askMove()
 	{
 		// TODO
 		return null;
@@ -79,7 +78,7 @@ public class Player {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (this.getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
 		if (this.id != other.id)

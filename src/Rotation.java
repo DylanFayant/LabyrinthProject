@@ -1,3 +1,5 @@
+import java.util.Random;
+
 
 /**
  * The enum of the rotations available
@@ -34,4 +36,12 @@ public enum Rotation
 		return this.rotation;
 	}
 
+	/**
+	 * Get a random rotation
+	 * @return a random rotation taken on the list of the rotations
+	 */
+	public static Rotation getRandomRotation()
+	{
+		return Rotation.values()[new Random().nextInt(Rotation.values().length)];
+	}
 }

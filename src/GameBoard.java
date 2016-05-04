@@ -5,6 +5,8 @@ import java.util.Map;
 
 import Exceptions.InvalidInsertionException;
 import Exceptions.InvalidMoveException;
+import Exceptions.XisNotInGameboardException;
+import Exceptions.YisNotInGameboardException;
 
 /**
  * This class is used to represent the labyrinth's GameBoard. 
@@ -21,7 +23,7 @@ public class GameBoard {
 	/**
 	 * Gameboard's height
 	 */
-	private static final int HEIGHT = 7;
+	public static final int HEIGHT = 7;
 	
 	/**
 	 * Table containing the tiles
@@ -31,32 +33,39 @@ public class GameBoard {
 	/**
 	 * HashMap containing the players pawns
 	 */
-	Map<Player, Position> pawns = new HashMap<Player, Position>();
+	Map<Integer, PositionInTheGameBoard> pawns = new HashMap<Integer, PositionInTheGameBoard>();
 	
 	/**
 	 * Creates and generates a HashMap who contains all the tiles fixed and their positions
 	 */
-	private final static HashMap<Position, TilePositionedFixed> tilesFixed = new HashMap<Position, TilePositionedFixed>();
+	private final static HashMap<PositionInTheGameBoard, TilePositionedFixed> tilesFixed = new HashMap<PositionInTheGameBoard, TilePositionedFixed>();
 	static {
-		tilesFixed.put(new Position(0, 0), new TilePositionedFixed(Tile.TILE1, Rotation.ROTATION2));
-		tilesFixed.put(new Position(2, 0), new TilePositionedFixed(Tile.TILE3, Rotation.ROTATION1));
-		tilesFixed.put(new Position(4, 0), new TilePositionedFixed(Tile.TILE5, Rotation.ROTATION1));
-		tilesFixed.put(new Position(6, 0), new TilePositionedFixed(Tile.TILE7, Rotation.ROTATION3));
+		try
+		{
+			tilesFixed.put(new PositionInTheGameBoard(0, 0), new TilePositionedFixed(Tile.TILE1, Rotation.ROTATION2));
+			tilesFixed.put(new PositionInTheGameBoard(2, 0), new TilePositionedFixed(Tile.TILE3, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(4, 0), new TilePositionedFixed(Tile.TILE5, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(6, 0), new TilePositionedFixed(Tile.TILE7, Rotation.ROTATION3));
 
-		tilesFixed.put(new Position(0, 2), new TilePositionedFixed(Tile.TILE15, Rotation.ROTATION4));
-		tilesFixed.put(new Position(2, 2), new TilePositionedFixed(Tile.TILE17, Rotation.ROTATION4));
-		tilesFixed.put(new Position(4, 2), new TilePositionedFixed(Tile.TILE19, Rotation.ROTATION1));
-		tilesFixed.put(new Position(6, 2), new TilePositionedFixed(Tile.TILE21, Rotation.ROTATION2));
+			tilesFixed.put(new PositionInTheGameBoard(0, 2), new TilePositionedFixed(Tile.TILE15, Rotation.ROTATION4));
+			tilesFixed.put(new PositionInTheGameBoard(2, 2), new TilePositionedFixed(Tile.TILE17, Rotation.ROTATION4));
+			tilesFixed.put(new PositionInTheGameBoard(4, 2), new TilePositionedFixed(Tile.TILE19, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(6, 2), new TilePositionedFixed(Tile.TILE21, Rotation.ROTATION2));
 
-		tilesFixed.put(new Position(0, 4), new TilePositionedFixed(Tile.TILE29, Rotation.ROTATION4));
-		tilesFixed.put(new Position(2, 4), new TilePositionedFixed(Tile.TILE31, Rotation.ROTATION3));
-		tilesFixed.put(new Position(4, 4), new TilePositionedFixed(Tile.TILE33, Rotation.ROTATION2));
-		tilesFixed.put(new Position(6, 4), new TilePositionedFixed(Tile.TILE35, Rotation.ROTATION2));
+			tilesFixed.put(new PositionInTheGameBoard(0, 4), new TilePositionedFixed(Tile.TILE29, Rotation.ROTATION4));
+			tilesFixed.put(new PositionInTheGameBoard(2, 4), new TilePositionedFixed(Tile.TILE31, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(4, 4), new TilePositionedFixed(Tile.TILE33, Rotation.ROTATION2));
+			tilesFixed.put(new PositionInTheGameBoard(6, 4), new TilePositionedFixed(Tile.TILE35, Rotation.ROTATION2));
 
-		tilesFixed.put(new Position(0, 6), new TilePositionedFixed(Tile.TILE43, Rotation.ROTATION1));
-		tilesFixed.put(new Position(2, 6), new TilePositionedFixed(Tile.TILE45, Rotation.ROTATION3));
-		tilesFixed.put(new Position(4, 6), new TilePositionedFixed(Tile.TILE47, Rotation.ROTATION3));
-		tilesFixed.put(new Position(6, 6), new TilePositionedFixed(Tile.TILE49, Rotation.ROTATION4));
+			tilesFixed.put(new PositionInTheGameBoard(0, 6), new TilePositionedFixed(Tile.TILE43, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(2, 6), new TilePositionedFixed(Tile.TILE45, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(4, 6), new TilePositionedFixed(Tile.TILE47, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(6, 6), new TilePositionedFixed(Tile.TILE49, Rotation.ROTATION4));
+		}
+		catch (XisNotInGameboardException | YisNotInGameboardException e)
+		{
+			// never happens
+		}
 	}
 	
 	/**
@@ -68,7 +77,7 @@ public class GameBoard {
 	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
 	 * @param players The players list
 	 */
-	public GameBoard(Player players[]) {
+	public GameBoard(int playersId[]) {
 		this.gameBoard = new TilePositioned[GameBoard.WIDTH][GameBoard.HEIGHT];
 		
 		LinkedList<TilePositionedMovable> tilesMovable = new LinkedList<TilePositionedMovable>();
@@ -120,16 +129,23 @@ public class GameBoard {
 		{
 			for(int j = 0; j < GameBoard.HEIGHT; j++)
 			{
-				if(tilesFixed.containsKey(new Position(j, i)))
+				try
 				{
-					this.gameBoard[j][i] = tilesFixed.get(new Position(j, i));
+					if(tilesFixed.containsKey(new PositionInTheGameBoard(j, i)))
+					{
+						this.gameBoard[j][i] = tilesFixed.get(new PositionInTheGameBoard(j, i));
+					}
+					else
+					{
+						Rotation aRotation = theRotations[(int)(Math.random()*theRotations.length)];
+						TilePositionedMovable aTile = tilesMovable.removeFirst();
+						aTile.setRotation(aRotation);
+						this.gameBoard[j][i] = aTile;
+					}
 				}
-				else
+				catch (XisNotInGameboardException | YisNotInGameboardException e)
 				{
-					Rotation aRotation = theRotations[(int)(Math.random()*theRotations.length)];
-					TilePositionedMovable aTile = tilesMovable.removeFirst();
-					aTile.setRotation(aRotation);
-					this.gameBoard[j][i] = aTile;
+					// never happens
 				}
 				System.out.print(this.gameBoard[j][i].toString());
 			}
@@ -137,10 +153,17 @@ public class GameBoard {
 		}
 		
 		// save the pawns positions
-		this.pawns.put(players[0], new Position(0,0));
-		this.pawns.put(players[1], new Position(0,GameBoard.WIDTH));
-		this.pawns.put(players[2], new Position(GameBoard.HEIGHT,0));
-		this.pawns.put(players[3], new Position(GameBoard.HEIGHT,GameBoard.WIDTH));
+		try
+		{
+			this.pawns.put(playersId[0], new PositionInTheGameBoard(0,0));
+			this.pawns.put(playersId[1], new PositionInTheGameBoard(0,GameBoard.WIDTH));
+			this.pawns.put(playersId[2], new PositionInTheGameBoard(GameBoard.HEIGHT,0));
+			this.pawns.put(playersId[3], new PositionInTheGameBoard(GameBoard.HEIGHT,GameBoard.WIDTH));
+		}
+		catch (XisNotInGameboardException | YisNotInGameboardException e)
+		{
+			// never happens
+		}
 	}
 
 	/**
@@ -285,7 +308,7 @@ public class GameBoard {
 	 * @param newMove a move.
 	 * @throws InvalidMoveException 
 	 */
-	public void processMoving(Position newMove) throws InvalidMoveException
+	public void processMoving(Movement newMove) throws InvalidMoveException
 	{
 		// TODO
 	}
