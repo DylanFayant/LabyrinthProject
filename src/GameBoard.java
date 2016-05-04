@@ -460,6 +460,16 @@ public class GameBoard {
 			return false;
 		return true;
 	}
+	
+	/**
+	 * Get the treasure in the tile where the player is placed
+	 * @param playerId
+	 * @return Treasure
+	 */
+	public Treasure treasureInPlayerTile(int playerId)
+	{
+		return this.gameBoard[this.pawns.get(playerId).getX()][this.pawns.get(playerId).getY()].getTile().getTreasure();
+	}
 
 	/**
 	 * @see java.lang.Object#toString()
@@ -471,7 +481,19 @@ public class GameBoard {
 		{
 			for(int j = 0; j < GameBoard.HEIGHT; j++)
 			{
-				aString += this.gameBoard[j][i].toString();
+				try {
+					if(this.pawns.containsValue(new PositionInTheGameBoard(j, i)))
+						aString += this.gameBoard[j][i].toString();
+					else
+					{
+						for (Map.Entry<Integer, PositionInTheGameBoard> e : this.pawns.entrySet()) {
+							if(e.getValue() == new PositionInTheGameBoard(j, i))
+								aString += this.gameBoard[j][i].toString(e.getKey());
+						}
+					}
+				} catch (XisNotInGameboardException | YisNotInGameboardException e) {
+					// impossible
+				}
 			}
 			aString += "\n";
 		}

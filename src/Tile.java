@@ -79,9 +79,22 @@ public enum Tile
 		this.treasure = treasure0;
 	}
 	
+	/**
+	 * Get the type of the tile
+	 * @return TileType
+	 */
 	public TileType getTileType()
 	{
 		return this.tileType;
+	}
+	
+	/**
+	 * Get the treasure of the tile
+	 * @return Treasure
+	 */
+	public Treasure getTreasure()
+	{
+		return this.treasure;
 	}
 	
 	/**

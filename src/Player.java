@@ -1,3 +1,9 @@
+import java.util.Random;
+
+import Exceptions.StackIsEmptyException;
+import Exceptions.XisNotInGameboardException;
+import Exceptions.YisNotInGameboardException;
+
 /**
  * This class represent a player
  * It's used to manage the interaction between the player and the game.
@@ -20,6 +26,11 @@ public class Player {
 	private final TreasureStack treasureStack;
 	
 	/**
+	 * Current objectif treasure for the player
+	 */
+	private Treasure currentTreasure;
+	
+	/**
 	 * Create a new player with an unique id
 	 * @param treasureStack 
 	 */
@@ -27,6 +38,11 @@ public class Player {
 		Player.currentMaxId++;
 		this.id = currentMaxId;
 		this.treasureStack = treasureStack;
+		try {
+			this.currentTreasure = this.treasureStack.pickTreasure();
+		} catch (StackIsEmptyException e) {
+			// impossible
+		}
 	}
 
 	/**
@@ -43,26 +59,57 @@ public class Player {
 	 */
 	public Insertion askInsertion()
 	{
-		// Random insertion
+		// TODO : Other way than random insertion
 		return new Insertion();
 	}
 
 	/**
 	 * Ask the player a move.
+	 * @param aMove 
 	 * @return Move, a move (position)
 	 */
-	public Movement askMove()
+	public Movement askMove(Movement aMove)
 	{
-		// TODO : Random move
-		return null;
+		Direction[] directions = Direction.values();
+		while(true)
+		{
+			try {
+				aMove.nextMove(directions[new Random().nextInt(directions.length)]);
+				break;
+			} catch (XisNotInGameboardException e) {
+				// make a loop
+			} catch (YisNotInGameboardException e) {
+				// make a loop
+			}
+		}
+		return aMove;
 	}
 
 	/**
 	 * Get the player's treasure stack
 	 * @return treasureStack
 	 */
-	public TreasureStack getTreasureStack() {
+	public TreasureStack getTreasureStack()
+	{
 		return this.treasureStack;
+	}
+	
+	/**
+	 * Get the current treasure card of the player
+	 * @return Treasure
+	 */
+	public Treasure getCurrentTreasure()
+	{
+		return this.currentTreasure;
+	}
+	
+	/**
+	 * Pick the next treasure in the stack
+	 * @throws StackIsEmptyException
+	 */
+	public void nextTreasure() throws StackIsEmptyException 
+	{
+		this.currentTreasure = this.treasureStack.pickTreasure();
 	}
 	
 	/**
@@ -91,5 +138,10 @@ public class Player {
 		if (this.id != other.id)
 			return false;
 		return true;
+	}
+	
+	public String toString() 
+	{
+		return "Player's id: " + this.id;
 	}
 }

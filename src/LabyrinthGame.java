@@ -86,7 +86,7 @@ public class LabyrinthGame {
 	public void play()
 	{
 		// Initialization
-		Player currentPlayer;
+		Player currentPlayer = null;
 		boolean gameIsOver = false;
 		int playerPointer = 0;
 		
@@ -111,10 +111,10 @@ public class LabyrinthGame {
 				}
 			}
 			
-			Movement newMove = null;
+			Movement newMove = new Movement(this.gameboard.pawns.get(currentPlayer.getId()));
 			while(true)
 			{
-				newMove = currentPlayer.askMove();
+				newMove = currentPlayer.askMove(newMove);
 				try
 				{
 					this.gameboard.processMoving(newMove, currentPlayer.getId());
@@ -126,8 +126,19 @@ public class LabyrinthGame {
 				}
 			}
 			
-			// TODO  make the system of finding a treasure + winning the play
-			gameIsOver = true;
+			if(this.gameboard.treasureInPlayerTile(currentPlayer.getId()) == currentPlayer.getCurrentTreasure())
+			{
+				try {
+					currentPlayer.nextTreasure();
+				} catch (StackIsEmptyException e) {
+					gameIsOver = true;
+				}
+			}
+			
+			System.out.println(this.gameboard.toString());
 		}
+
+		System.out.println("Game is over !");
+		System.out.println("Winner: " + currentPlayer.toString());
 	}
 }
