@@ -341,70 +341,124 @@ public class GameBoard {
 	 * @return boolean
 	 */
 	private boolean moveIsValid(PositionInTheGameBoard previousPosition, PositionInTheGameBoard nextPosition) {
-		TilePositioned previousTilePositioned = this.gameBoard[previousPosition.getX()][previousPosition.getY()];
-		
+		// Make the differences between the new and the old position (to know the direction of the move)
 		int xMove = nextPosition.getX()-previousPosition.getX();
 		int yMove = nextPosition.getY()-previousPosition.getY();
 		
+		// Get information about the tile in the old position
+		TilePositioned previousTilePositioned = this.gameBoard[previousPosition.getX()][previousPosition.getY()];
 		Rotation previousTileRotation = previousTilePositioned.getRotation();
 		Tile previousTile = previousTilePositioned.getTile();
 		
+		// Get information about the tile in the new position
+		TilePositioned nextTilePositioned = this.gameBoard[nextPosition.getX()][nextPosition.getY()];
+		Rotation nextTileRotation = nextTilePositioned.getRotation();
+		Tile nextTile = nextTilePositioned.getTile();
+		
 		boolean moveIsValid = false;
 		
-		if(xMove == 1)
-			moveIsValid = this.rightMove(previousTile, previousTileRotation);
-		if(xMove == -1)
-			moveIsValid = this.leftMove(previousTile, previousTileRotation);
-		if(yMove == 1)
-			moveIsValid = this.downMove(previousTile, previousTileRotation);
-		if(yMove == -1)
-			moveIsValid = this.upMove(previousTile, previousTileRotation);
+		if(xMove == 1) // right move
+		{
+			if(this.rightWay(previousTile, previousTileRotation) && this.leftWay(nextTile, nextTileRotation))
+				moveIsValid = true;
+		}
+		if(xMove == -1) // left move
+		{
+			if(this.leftWay(previousTile, previousTileRotation) && this.rightWay(nextTile, nextTileRotation))
+				moveIsValid = true;
+		}
+		if(yMove == 1) // down move
+		{
+			if(this.downWay(previousTile, previousTileRotation) && this.upWay(nextTile, nextTileRotation))
+				moveIsValid = true;
+		}
+		if(yMove == -1) // up move
+		{
+			if(this.upWay(previousTile, previousTileRotation) && this.downWay(nextTile, nextTileRotation))
+				moveIsValid = true;
+		}
 		
 		return moveIsValid;
 	}
 	
 	/**
-	 * 
-	 * @param previousTile
-	 * @param previousTileRotation
-	 * @return
+	 * Check if the way is available to the up of the tile
+	 * @param tile
+	 * @param tileRotation
+	 * @return boolean
 	 */
-	private boolean upMove(Tile previousTile, Rotation previousTileRotation) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean upWay(Tile tile, Rotation tileRotation) {
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION2)
+			return false;
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION4)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION2)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION3)
+			return false;
+		if(tile.getTileType() == TileType.T && tileRotation == Rotation.ROTATION1)
+			return false;
+		return true;
 	}
 	
 	/**
-	 * 
+	 * Check if the way is available to the down of the tile
 	 * @param previousTile
 	 * @param previousTileRotation
-	 * @return
+	 * @return boolean
 	 */
-	private boolean downMove(Tile previousTile, Rotation previousTileRotation) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean downWay(Tile tile, Rotation tileRotation) {
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION2)
+			return false;
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION4)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION1)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION4)
+			return false;
+		if(tile.getTileType() == TileType.T && tileRotation == Rotation.ROTATION3)
+			return false;
+		return true;
 	}
 	
 	/**
-	 * 
+	 * Check if the way is available to the left of the tile
 	 * @param previousTile
 	 * @param previousTileRotation
-	 * @return
+	 * @return boolean
 	 */
-	private boolean leftMove(Tile previousTile, Rotation previousTileRotation) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean leftWay(Tile tile, Rotation tileRotation) {
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION1)
+			return false;
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION3)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION1)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION2)
+			return false;
+		if(tile.getTileType() == TileType.T && tileRotation == Rotation.ROTATION4)
+			return false;
+		return true;
 	}
 	
 	/**
-	 * 
+	 * Check if the way is available to the right of the tile
 	 * @param previousTile
 	 * @param previousTileRotation
-	 * @return
+	 * @return boolean
 	 */
-	private boolean rightMove(Tile previousTile, Rotation previousTileRotation) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean rightWay(Tile tile, Rotation tileRotation) {
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION1)
+			return false;
+		if(tile.getTileType() == TileType.I && tileRotation == Rotation.ROTATION3)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION3)
+			return false;
+		if(tile.getTileType() == TileType.L && tileRotation == Rotation.ROTATION4)
+			return false;
+		if(tile.getTileType() == TileType.T && tileRotation == Rotation.ROTATION2)
+			return false;
+		return true;
 	}
 
 	/**
