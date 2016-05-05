@@ -69,10 +69,10 @@ public abstract class TilePositioned
 
 	/**
 	 * toString adapted to a tile with a player
-	 * @param playerId
+	 * @param allPlayers
 	 * @return String
 	 */
-	public String toString(Integer playerId) {
-		return "["+this.tile+" | "+this.fixed+" | "+this.rotation+" | Player "+playerId+"]";
+	public String toString(String allPlayers) {
+		return "["+this.tile+" | "+this.fixed+" | "+this.rotation+" | Player(s) "+allPlayers+"]";
 	}
 }

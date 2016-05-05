@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 import Exceptions.*;
 
 /**
@@ -90,6 +96,24 @@ public class LabyrinthGame {
 		boolean gameIsOver = false;
 		int playerPointer = 0;
 		
+		// Save the game logs
+		File logFile = new File("log.txt");
+		if(logFile.exists())
+			logFile.delete();
+		try {
+			logFile.createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		FileOutputStream logs = null;
+		try {
+			logs = new FileOutputStream(logFile, true);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		PrintStream logsStream = new PrintStream(logs);
+		
+		
 		while(!gameIsOver)
 		{
 			currentPlayer = this.players[playerPointer];
@@ -135,7 +159,7 @@ public class LabyrinthGame {
 				}
 			}
 			
-			System.out.println(this.gameboard.toString());
+			logsStream.print(this.gameboard.toString() + "\n");
 		}
 
 		System.out.println("Game is over !");

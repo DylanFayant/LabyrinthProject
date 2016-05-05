@@ -481,8 +481,25 @@ public class GameBoard {
 		{
 			for(int j = 0; j < GameBoard.HEIGHT; j++)
 			{
+				try {
+					String allPlayers = "";
+					if(this.pawns.containsValue(new PositionInTheGameBoard(j, i)))
+					{
+						for(int players = 0; players < this.pawns.size(); players++) 
+						{							
+							if(this.pawns.get(players).equals(new PositionInTheGameBoard(j, i)))
+							{
+								allPlayers += players + ",";
+							}
+						}
+					}
+					if(allPlayers == "")
 						aString += this.gameBoard[j][i].toString();
-				
+					else
+						aString += this.gameBoard[j][i].toString(allPlayers);
+				} catch (XisNotInGameboardException | YisNotInGameboardException e) {
+					// never happens
+				}
 			}
 			aString += "\n";
 		}
