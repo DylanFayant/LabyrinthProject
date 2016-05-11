@@ -27,14 +27,28 @@ public class LabyrinthGame {
 	 * the players.
 	 */
 	private final Player[] players;
+	
+	/**
+	 * the players input
+	 */
+	private final PlayerInput playerInput;
+	
+	/**
+	 * the players output
+	 */
+	private PlayerOutput playerOutput;
 
 	/**
 	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
 	 * linked to players in the gameboard's corners. Treasure cards have been distributed to players).
+	 * @param playerInput PlayerInput
+	 * @param playerOutput PlayerOutput
 	 */
-	public LabyrinthGame()
+	public LabyrinthGame(PlayerInput playerInput, PlayerOutput playerOutput)
 	{		
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
+		this.playerInput = playerInput;
+		this.playerOutput = playerOutput;
 	
 		/*
 		 * Players' treasure stack generation.
@@ -96,24 +110,6 @@ public class LabyrinthGame {
 		boolean gameIsOver = false;
 		int playerPointer = 0;
 		
-		// Save the game logs
-		File logFile = new File("log.txt");
-		if(logFile.exists())
-			logFile.delete();
-		try {
-			logFile.createNewFile();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		FileOutputStream logs = null;
-		try {
-			logs = new FileOutputStream(logFile, true);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		PrintStream logsStream = new PrintStream(logs);
-		
-		
 		while(!gameIsOver)
 		{
 			currentPlayer = this.players[playerPointer];
@@ -123,7 +119,7 @@ public class LabyrinthGame {
 			Insertion newInsertion = null;
 			while(true)
 			{
-				newInsertion = currentPlayer.askInsertion();
+				newInsertion = this.playerInput.askInsertion();
 				try
 				{
 					this.gameboard.processInsertion(newInsertion);
@@ -138,7 +134,7 @@ public class LabyrinthGame {
 			while(true)
 			{
 				Movement newMove = new Movement(this.gameboard.pawns.get(currentPlayer.getId()));
-				Movement theMove = currentPlayer.askMove(newMove);
+				Movement theMove = this.playerInput.askMove(newMove);
 				try
 				{
 					this.gameboard.processMoving(theMove, currentPlayer.getId());
@@ -159,10 +155,9 @@ public class LabyrinthGame {
 				}
 			}
 			
-			logsStream.print(this.gameboard.toString() + "\n");
+			this.playerOutput.gameBoardUpdate(this.gameboard);
 		}
 
-		System.out.println("Game is over !");
-		System.out.println("Winner: " + currentPlayer.toString());
+		this.playerOutput.gameIsOver(currentPlayer.getId());
 	}
 }

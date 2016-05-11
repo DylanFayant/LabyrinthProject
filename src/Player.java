@@ -54,42 +54,6 @@ public class Player {
 	}
 
 	/**
-	 * Ask the player a tile insertion.
-	 * @return Insertion, a tile insertion.
-	 */
-	public Insertion askInsertion()
-	{
-		// TODO : Other way than random insertion
-		return new Insertion();
-	}
-
-	/**
-	 * Ask the player a move.
-	 * @param aMove 
-	 * @return Move, a move (position)
-	 */
-	public Movement askMove(Movement aMove)
-	{
-		Direction[] directions = Direction.values();
-		int random = new Random().nextInt(4);
-		while(aMove.getMovement().size() < random)
-		{
-			while(true)
-			{
-				try {
-					aMove.nextMove(directions[new Random().nextInt(directions.length)]);
-					break;
-				} catch (XisNotInGameboardException e) {
-					// make a loop
-				} catch (YisNotInGameboardException e) {
-					// make a loop
-				}
-			}
-		}
-		return aMove;
-	}
-
-	/**
 	 * Get the player's treasure stack
 	 * @return treasureStack
 	 */

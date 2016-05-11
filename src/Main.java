@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 
 /**
  * Application that launches a Labyrinth game
@@ -10,7 +12,17 @@ public class Main {
 	 * @param args command-line arguments (unused)
 	 */
 	public static void main(String[] args) {
-		new LabyrinthGame().play(); 
+		PlayerInput playerInput = new SimulatedPlayerInput();
+		PlayerOutput playerOutput = null;
+		try
+		{
+			playerOutput = new InFilePlayerOutput("log.txt");
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		new LabyrinthGame(playerInput, playerOutput).play(); 
 	}
 
 }
