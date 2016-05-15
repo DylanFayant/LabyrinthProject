@@ -28,9 +28,9 @@ public class MainWindow extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
-		this.topArea = new TopArea();
+		this.topArea = new TopArea(this);
 		
-		this.bottomArea = new BottomArea();
+		this.bottomArea = new BottomArea(this);
 		
 		/*
 		 * Split the page
