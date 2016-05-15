@@ -1,10 +1,28 @@
 package fr.iutval.labyrinthgame;
 
+import fr.iutval.labyrinthgame.gui.MainWindow;
+
+/**
+ * @author TODO
+ *
+ */
 public class GUIPlayerOutput implements PlayerOutput {
+	
+	/**
+	 * 
+	 */
+	private MainWindow mainWindow;
+	
+	/**
+	 * @param mainWindow
+	 */
+	public GUIPlayerOutput(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+	}
 
 	@Override
 	public void gameBoardUpdate(GameBoard gameBoard) {
-		// TODO Auto-generated method stub
+		this.mainWindow.topArea.loadGameBoard(gameBoard);
 
 	}
 

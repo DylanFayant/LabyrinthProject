@@ -1,5 +1,5 @@
 package fr.iutval.labyrinthgame;
-import Exceptions.StackIsEmptyException;
+import fr.iutval.labyrinthgame.exceptions.StackIsEmptyException;
 
 /**
  * This class represent a player

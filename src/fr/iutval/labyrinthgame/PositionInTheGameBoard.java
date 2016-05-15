@@ -1,8 +1,8 @@
 package fr.iutval.labyrinthgame;
 import java.util.Random;
 
-import Exceptions.XisNotInGameboardException;
-import Exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
 
 /**
  * Represents a 2D position

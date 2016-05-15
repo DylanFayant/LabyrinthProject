@@ -2,8 +2,8 @@ package fr.iutval.labyrinthgame;
 import java.util.LinkedList;
 import java.util.List;
 
-import Exceptions.XisNotInGameboardException;
-import Exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
 
 /**
  * Represents a movement

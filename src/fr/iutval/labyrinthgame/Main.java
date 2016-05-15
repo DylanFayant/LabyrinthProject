@@ -1,7 +1,7 @@
 package fr.iutval.labyrinthgame;
 import java.io.IOException;
 
-import ihm.MainWindow;
+import fr.iutval.labyrinthgame.gui.MainWindow;
 
 
 /**

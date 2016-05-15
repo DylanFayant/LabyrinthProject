@@ -82,6 +82,6 @@ public abstract class TilePositioned
 	 * @return String (tile's link)
 	 */
 	public String getLink() {
-		return this.tile + "rot" + this.rotation;
+		return this.tile + "" + this.rotation;
 	}
 }

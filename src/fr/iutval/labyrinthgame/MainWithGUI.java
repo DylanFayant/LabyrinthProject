@@ -1,7 +1,7 @@
 package fr.iutval.labyrinthgame;
 import java.io.IOException;
 
-import ihm.MainWindow;
+import fr.iutval.labyrinthgame.gui.MainWindow;
 
 
 /**
@@ -17,15 +17,7 @@ public class MainWithGUI {
 	public static void main(String[] args) {
 		
 		PlayerInput playerInput = new SimulatedPlayerInput();
-		PlayerOutput playerOutput = new GUIPlayerOutput();
-		try
-		{
-			playerOutput = new InFilePlayerOutput("log.txt");
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		PlayerOutput playerOutput = new GUIPlayerOutput(new MainWindow());
 		new LabyrinthGame(playerInput, playerOutput).play(); 
 	}
 

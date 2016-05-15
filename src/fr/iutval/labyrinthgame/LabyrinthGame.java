@@ -1,5 +1,5 @@
 package fr.iutval.labyrinthgame;
-import Exceptions.*;
+import fr.iutval.labyrinthgame.exceptions.*;
 
 /**
  * This class represents a Labyrinth game.

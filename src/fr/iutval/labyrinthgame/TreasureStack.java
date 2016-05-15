@@ -1,7 +1,7 @@
 package fr.iutval.labyrinthgame;
 import java.util.Arrays;
 
-import Exceptions.*;
+import fr.iutval.labyrinthgame.exceptions.*;
 /**
  * This class represent a stack of treasures.
  * A stack of treasures put in a given order and that can be picked one by one by the top.
