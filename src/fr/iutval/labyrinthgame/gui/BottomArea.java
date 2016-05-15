@@ -107,25 +107,16 @@ public class BottomArea extends JPanel implements ActionListener{
 	 */
 	public void refreshBottomArea(int playerId, Tile freeCard, Treasure searchedTreasure) {
 		this.removeAll();
-		this.tileRotation = 0;
-		this.playerId = playerId;
-		this.freeCard = freeCard;
-		this.searchedTreasure = searchedTreasure;
-		
-		GridLayout experimentLayout = new GridLayout();
-		
-	    this.setLayout(experimentLayout);
 	    
 	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
 	    this.theTile.addActionListener(this);
 	    this.thePlayer = new JButton("Player " + playerId);
-	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
 	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 
 	    this.add(this.theTile);
 	    this.add(this.thePlayer);
 	    this.add(this.searchedCard);
 
-		SwingUtilities.updateComponentTreeUI(this);
+		//SwingUtilities.updateComponentTreeUI(this); TODO
 	}
 }
