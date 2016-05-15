@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import ihm.MainWindow;
+
 
 /**
  * Application that launches a Labyrinth game
@@ -12,6 +14,8 @@ public class Main {
 	 * @param args command-line arguments (unused)
 	 */
 	public static void main(String[] args) {
+		new MainWindow();
+		
 		PlayerInput playerInput = new SimulatedPlayerInput();
 		PlayerOutput playerOutput = null;
 		try

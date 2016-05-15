@@ -1,8 +1,4 @@
-import java.util.Random;
-
 import Exceptions.StackIsEmptyException;
-import Exceptions.XisNotInGameboardException;
-import Exceptions.YisNotInGameboardException;
 
 /**
  * This class represent a player
@@ -108,6 +104,9 @@ public class Player {
 		return true;
 	}
 	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() 
 	{
 		return "Player's id: " + this.id;

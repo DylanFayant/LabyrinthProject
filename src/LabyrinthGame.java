@@ -1,9 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-
 import Exceptions.*;
 
 /**
@@ -113,6 +107,8 @@ public class LabyrinthGame {
 		while(!gameIsOver)
 		{
 			currentPlayer = this.players[playerPointer];
+			
+			// TODO out-> player changes
 			
 			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 			
