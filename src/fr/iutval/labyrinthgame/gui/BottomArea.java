@@ -91,7 +91,7 @@ public class BottomArea extends JPanel implements ActionListener{
 		    this.theTile.addActionListener(this);
 		    this.thePlayer = new JButton("Player " + playerId);
 		    this.thePlayer.setPreferredSize(new Dimension(20, 0));
-		    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+"0.png"));
+		    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 
 		    this.add(this.theTile);
 		    this.add(this.thePlayer);
@@ -120,7 +120,7 @@ public class BottomArea extends JPanel implements ActionListener{
 	    this.theTile.addActionListener(this);
 	    this.thePlayer = new JButton("Player " + playerId);
 	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
-	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+"0.png"));
+	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 
 	    this.add(this.theTile);
 	    this.add(this.thePlayer);

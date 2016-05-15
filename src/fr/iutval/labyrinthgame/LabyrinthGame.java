@@ -109,9 +109,6 @@ public class LabyrinthGame {
 		{
 			currentPlayer = this.players[playerPointer];
 			
-			// TODO out-> player changes
-			
-
 			this.playerOutput.gameBoardUpdate(this.gameboard);
 			this.playerOutput.playerHasChanged(currentPlayer.getId(), this.gameboard.getFreeTile(), currentPlayer.getCurrentTreasure());
 			
