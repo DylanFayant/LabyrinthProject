@@ -73,7 +73,7 @@ public class TopArea extends JPanel {
 				}
 				else
 				{
-					PanelImage panel = new PanelImage("img/"+(gameBoard.getGameBoard()[i-1][j-1]).getLink()+".png");
+					PanelImage panel = new PanelImage("img/"+(gameBoard.getGameBoard()[j-1][i-1]).getLink()+".png");
 					
 					PositionInTheGameBoard currentPosition = null;
 					try {

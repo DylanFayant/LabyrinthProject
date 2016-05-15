@@ -45,23 +45,23 @@ public class GameBoard {
 		try
 		{
 			tilesFixed.put(new PositionInTheGameBoard(0, 0), new TilePositionedFixed(Tile.TILE1, Rotation.ROTATION2));
-			tilesFixed.put(new PositionInTheGameBoard(0, 2), new TilePositionedFixed(Tile.TILE3, Rotation.ROTATION1));
-			tilesFixed.put(new PositionInTheGameBoard(0, 4), new TilePositionedFixed(Tile.TILE5, Rotation.ROTATION1));
-			tilesFixed.put(new PositionInTheGameBoard(0, 6), new TilePositionedFixed(Tile.TILE7, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(2, 0), new TilePositionedFixed(Tile.TILE3, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(4, 0), new TilePositionedFixed(Tile.TILE5, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(6, 0), new TilePositionedFixed(Tile.TILE7, Rotation.ROTATION3));
 
-			tilesFixed.put(new PositionInTheGameBoard(2, 0), new TilePositionedFixed(Tile.TILE15, Rotation.ROTATION4));
+			tilesFixed.put(new PositionInTheGameBoard(0, 2), new TilePositionedFixed(Tile.TILE15, Rotation.ROTATION4));
 			tilesFixed.put(new PositionInTheGameBoard(2, 2), new TilePositionedFixed(Tile.TILE17, Rotation.ROTATION4));
-			tilesFixed.put(new PositionInTheGameBoard(2, 4), new TilePositionedFixed(Tile.TILE19, Rotation.ROTATION1));
-			tilesFixed.put(new PositionInTheGameBoard(2, 6), new TilePositionedFixed(Tile.TILE21, Rotation.ROTATION2));
+			tilesFixed.put(new PositionInTheGameBoard(4, 2), new TilePositionedFixed(Tile.TILE19, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(6, 2), new TilePositionedFixed(Tile.TILE21, Rotation.ROTATION2));
 
-			tilesFixed.put(new PositionInTheGameBoard(4, 0), new TilePositionedFixed(Tile.TILE29, Rotation.ROTATION4));
-			tilesFixed.put(new PositionInTheGameBoard(4, 2), new TilePositionedFixed(Tile.TILE31, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(0, 4), new TilePositionedFixed(Tile.TILE29, Rotation.ROTATION4));
+			tilesFixed.put(new PositionInTheGameBoard(2, 4), new TilePositionedFixed(Tile.TILE31, Rotation.ROTATION3));
 			tilesFixed.put(new PositionInTheGameBoard(4, 4), new TilePositionedFixed(Tile.TILE33, Rotation.ROTATION2));
-			tilesFixed.put(new PositionInTheGameBoard(4, 6), new TilePositionedFixed(Tile.TILE35, Rotation.ROTATION2));
+			tilesFixed.put(new PositionInTheGameBoard(6, 4), new TilePositionedFixed(Tile.TILE35, Rotation.ROTATION2));
 
-			tilesFixed.put(new PositionInTheGameBoard(6, 0), new TilePositionedFixed(Tile.TILE43, Rotation.ROTATION1));
-			tilesFixed.put(new PositionInTheGameBoard(6, 2), new TilePositionedFixed(Tile.TILE45, Rotation.ROTATION3));
-			tilesFixed.put(new PositionInTheGameBoard(6, 4), new TilePositionedFixed(Tile.TILE47, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(0, 6), new TilePositionedFixed(Tile.TILE43, Rotation.ROTATION1));
+			tilesFixed.put(new PositionInTheGameBoard(2, 6), new TilePositionedFixed(Tile.TILE45, Rotation.ROTATION3));
+			tilesFixed.put(new PositionInTheGameBoard(4, 6), new TilePositionedFixed(Tile.TILE47, Rotation.ROTATION3));
 			tilesFixed.put(new PositionInTheGameBoard(6, 6), new TilePositionedFixed(Tile.TILE49, Rotation.ROTATION4));
 		}
 		catch (XisNotInGameboardException | YisNotInGameboardException e)

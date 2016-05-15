@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		this.setTitle("Labyrinth Game");
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setSize(1080, 1080);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);

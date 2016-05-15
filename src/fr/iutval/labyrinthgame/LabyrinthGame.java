@@ -104,12 +104,13 @@ public class LabyrinthGame {
 		Player currentPlayer = null;
 		boolean gameIsOver = false;
 		int playerPointer = 0;
+
+		this.playerOutput.gameBoardUpdate(this.gameboard);
 		
 		while(!gameIsOver)
 		{
 			currentPlayer = this.players[playerPointer];
 			
-			this.playerOutput.gameBoardUpdate(this.gameboard);
 			this.playerOutput.playerHasChanged(currentPlayer.getId(), this.gameboard.getFreeTile(), currentPlayer.getCurrentTreasure());
 			
 			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
@@ -128,6 +129,8 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
+
+			this.playerOutput.gameBoardUpdate(this.gameboard);
 			
 			while(true)
 			{
@@ -143,6 +146,8 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
+			
+			this.playerOutput.gameBoardUpdate(this.gameboard);
 			
 			if(this.gameboard.treasureInPlayerTile(currentPlayer.getId()) == currentPlayer.getCurrentTreasure())
 			{
