@@ -1,6 +1,4 @@
 package fr.iutval.labyrinthgame;
-import java.io.IOException;
-
 import fr.iutval.labyrinthgame.gui.MainWindow;
 
 
@@ -15,9 +13,9 @@ public class MainWithGUI {
 	 * @param args command-line arguments (unused)
 	 */
 	public static void main(String[] args) {
-		
+		MainWindow theWindow = new MainWindow();
 		PlayerInput playerInput = new SimulatedPlayerInput();
-		PlayerOutput playerOutput = new GUIPlayerOutput(new MainWindow());
+		PlayerOutput playerOutput = new GUIPlayerOutput(theWindow);
 		new LabyrinthGame(playerInput, playerOutput).play(); 
 	}
 

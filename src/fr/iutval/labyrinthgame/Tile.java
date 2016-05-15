@@ -5,6 +5,7 @@ package fr.iutval.labyrinthgame;
  * @author Rachid Taghat - Dylan Fayant
  *
  */
+@SuppressWarnings("javadoc")
 public enum Tile
 {
 	TILE1(TileType.L, null),

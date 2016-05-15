@@ -30,7 +30,7 @@ public class MainWindow extends JFrame {
 		
 		this.topArea = new TopArea(this);
 		
-		this.bottomArea = new BottomArea(this);
+		this.bottomArea = new BottomArea(this, 0);
 		
 		/*
 		 * Split the page

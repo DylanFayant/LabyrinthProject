@@ -41,10 +41,10 @@ public class BottomArea extends JPanel implements ActionListener{
 	 * @param mainWindow 
 	 * 
 	 */
-	public BottomArea(MainWindow mainWindow) {
+	public BottomArea(MainWindow mainWindow, int rotation) {
 		this.mainWindow = mainWindow;
 		
-		this.tileRotation = 0;
+		this.tileRotation = rotation;
 		
 		GridLayout experimentLayout = new GridLayout();
 		
@@ -70,18 +70,9 @@ public class BottomArea extends JPanel implements ActionListener{
 		if(source == this.theTile)
 		{
 			this.tileRotation = (this.tileRotation+90)%360;
-			this.removeAll();
-			this.theTile = new JButton(new ImageIcon("img/"+Tile.TILE1+this.tileRotation+".png"));
-		    this.theTile.addActionListener(this);
-		    JButton btn2 = new JButton("Player 1");
-		    btn2.setPreferredSize(new Dimension(20, 0));
-		    JButton btn3 = new JButton(new ImageIcon("img/"+Tile.TILE1+"0.png"));
-
-		    this.add(this.theTile);
-		    this.add(btn2);
-		    this.add(btn3);
+			this.mainWindow.bottomArea = new BottomArea(this.mainWindow, this.tileRotation);
 		    
-			SwingUtilities.updateComponentTreeUI(this);
+			SwingUtilities.updateComponentTreeUI(this.mainWindow);
 		}
 		
 	}
