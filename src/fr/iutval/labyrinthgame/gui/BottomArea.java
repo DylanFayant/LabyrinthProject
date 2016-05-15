@@ -36,23 +36,33 @@ public class BottomArea extends JPanel implements ActionListener{
 	 * 
 	 */
 	public JButton searchedCard;
+	/**
+	 * 
+	 */
+	private int playerId;
+	/**
+	 * 
+	 */
+	private Tile freeCard;
 	
 	/**
 	 * @param mainWindow 
 	 * 
 	 */
-	public BottomArea(MainWindow mainWindow) {
+	public BottomArea(MainWindow mainWindow, int rotation, int playerId, Tile freeCard) {
 		this.mainWindow = mainWindow;
-		
-		this.tileRotation = 0;
+		this.tileRotation = rotation;
+		this.playerId = playerId;
+		this.freeCard = freeCard;
 		
 		GridLayout experimentLayout = new GridLayout();
 		
 	    this.setLayout(experimentLayout);
 	    
-	    this.theTile = new JButton(new ImageIcon("img/"+Tile.TILE1+this.tileRotation+".png"));
+	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
 	    this.theTile.addActionListener(this);
-	    this.thePlayer = new JButton("Player 1");
+	    this.theTile.setEnabled(false);
+	    this.thePlayer = new JButton("Player " + playerId);
 	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
 	    this.searchedCard = new JButton(new ImageIcon("img/"+Tile.TILE1+"0.png"));
 
@@ -71,17 +81,8 @@ public class BottomArea extends JPanel implements ActionListener{
 		{
 			this.tileRotation = (this.tileRotation+90)%360;
 			this.removeAll();
-			this.theTile = new JButton(new ImageIcon("img/"+Tile.TILE1+this.tileRotation+".png"));
-		    this.theTile.addActionListener(this);
-		    JButton btn2 = new JButton("Player 1");
-		    btn2.setPreferredSize(new Dimension(20, 0));
-		    JButton btn3 = new JButton(new ImageIcon("img/"+Tile.TILE1+"0.png"));
-
-		    this.add(this.theTile);
-		    this.add(btn2);
-		    this.add(btn3);
-		    
-			SwingUtilities.updateComponentTreeUI(this);
+			this.mainWindow.bottomArea = new BottomArea(this.mainWindow, this.tileRotation, this.playerId, this.freeCard);
+			SwingUtilities.updateComponentTreeUI(this.mainWindow);
 		}
 		
 	}

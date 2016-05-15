@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import fr.iutval.labyrinthgame.Tile;
+
 /**
  * @author TODO
  *
@@ -30,7 +32,7 @@ public class MainWindow extends JFrame {
 		
 		this.topArea = new TopArea(this);
 		
-		this.bottomArea = new BottomArea(this);
+		this.bottomArea = new BottomArea(this, 0, 1, Tile.TILE1);
 		
 		/*
 		 * Split the page

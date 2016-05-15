@@ -47,7 +47,7 @@ public class TopArea extends JPanel {
 		{
 			for(int j = 0; j < GameBoard.WIDTH+2; j++)
 			{
-				JButton button = new JButton();
+				InsertionButton button = new InsertionButton(j, i);
 				if(i == 0 || i == GameBoard.HEIGHT+1)
 				{
 					if(j == 0 || j == GameBoard.HEIGHT+1)

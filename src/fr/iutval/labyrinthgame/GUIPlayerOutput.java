@@ -23,7 +23,6 @@ public class GUIPlayerOutput implements PlayerOutput {
 	@Override
 	public void gameBoardUpdate(GameBoard gameBoard) {
 		this.mainWindow.topArea.loadGameBoard(gameBoard);
-
 	}
 
 	@Override
