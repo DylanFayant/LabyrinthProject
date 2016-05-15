@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import fr.iutval.labyrinthgame.Tile;
+import fr.iutval.labyrinthgame.Treasure;
 
 /**
  * @author TODO
@@ -32,7 +33,7 @@ public class MainWindow extends JFrame {
 		
 		this.topArea = new TopArea(this);
 		
-		this.bottomArea = new BottomArea(this, 0, 1, Tile.TILE1);
+		this.bottomArea = new BottomArea(this, -1, Tile.TILE1, Treasure.BAT);
 		
 		/*
 		 * Split the page

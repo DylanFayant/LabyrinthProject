@@ -111,10 +111,11 @@ public class LabyrinthGame {
 			
 			// TODO out-> player changes
 			
-			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 
 			this.playerOutput.gameBoardUpdate(this.gameboard);
-			this.playerOutput.playerHasChanged(currentPlayer);
+			this.playerOutput.playerHasChanged(currentPlayer.getId(), this.gameboard.getFreeTile(), currentPlayer.getCurrentTreasure());
+			
+			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 			
 			Insertion newInsertion = null;
 			while(true)

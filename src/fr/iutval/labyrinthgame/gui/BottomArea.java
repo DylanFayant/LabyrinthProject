@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import fr.iutval.labyrinthgame.Tile;
+import fr.iutval.labyrinthgame.Treasure;
 
 /**
  * @author TODO
@@ -39,21 +40,26 @@ public class BottomArea extends JPanel implements ActionListener{
 	/**
 	 * 
 	 */
-	private int playerId;
+	public int playerId;
 	/**
 	 * 
 	 */
-	private Tile freeCard;
+	public Tile freeCard;
+	/**
+	 * 
+	 */
+	public Treasure searchedTreasure;
 	
 	/**
 	 * @param mainWindow 
 	 * 
 	 */
-	public BottomArea(MainWindow mainWindow, int rotation, int playerId, Tile freeCard) {
+	public BottomArea(MainWindow mainWindow, int playerId, Tile freeCard, Treasure searchedTreasure) {
 		this.mainWindow = mainWindow;
-		this.tileRotation = rotation;
+		this.tileRotation = 0;
 		this.playerId = playerId;
 		this.freeCard = freeCard;
+		this.searchedTreasure = searchedTreasure;
 		
 		GridLayout experimentLayout = new GridLayout();
 		
@@ -61,10 +67,9 @@ public class BottomArea extends JPanel implements ActionListener{
 	    
 	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
 	    this.theTile.addActionListener(this);
-	    this.theTile.setEnabled(false);
 	    this.thePlayer = new JButton("Player " + playerId);
 	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
-	    this.searchedCard = new JButton(new ImageIcon("img/"+Tile.TILE1+"0.png"));
+	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 
 	    this.add(this.theTile);
 	    this.add(this.thePlayer);
@@ -76,14 +81,51 @@ public class BottomArea extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JComponent source = (JComponent)arg0.getSource();
-		
 		if(source == this.theTile)
 		{
 			this.tileRotation = (this.tileRotation+90)%360;
+			
 			this.removeAll();
-			this.mainWindow.bottomArea = new BottomArea(this.mainWindow, this.tileRotation, this.playerId, this.freeCard);
-			SwingUtilities.updateComponentTreeUI(this.mainWindow);
+		    
+		    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
+		    this.theTile.addActionListener(this);
+		    this.thePlayer = new JButton("Player " + playerId);
+		    this.thePlayer.setPreferredSize(new Dimension(20, 0));
+		    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+"0.png"));
+
+		    this.add(this.theTile);
+		    this.add(this.thePlayer);
+		    this.add(this.searchedCard);
+			SwingUtilities.updateComponentTreeUI(this);
 		}
+	}
+	
+	/**
+	 * @param playerId
+	 * @param freeCard
+	 * @param searchedTreasure
+	 */
+	public void refreshBottomArea(int playerId, Tile freeCard, Treasure searchedTreasure) {
+		this.removeAll();
+		this.tileRotation = 0;
+		this.playerId = playerId;
+		this.freeCard = freeCard;
+		this.searchedTreasure = searchedTreasure;
 		
+		GridLayout experimentLayout = new GridLayout();
+		
+	    this.setLayout(experimentLayout);
+	    
+	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
+	    this.theTile.addActionListener(this);
+	    this.thePlayer = new JButton("Player " + playerId);
+	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
+	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+"0.png"));
+
+	    this.add(this.theTile);
+	    this.add(this.thePlayer);
+	    this.add(this.searchedCard);
+
+		SwingUtilities.updateComponentTreeUI(this);
 	}
 }

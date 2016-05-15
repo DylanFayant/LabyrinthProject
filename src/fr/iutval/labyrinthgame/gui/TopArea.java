@@ -3,6 +3,7 @@ package fr.iutval.labyrinthgame.gui;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -39,6 +40,7 @@ public class TopArea extends JPanel {
 	@SuppressWarnings("deprecation")
 	public void loadGameBoard(GameBoard gameBoard) {
 		this.removeAll();
+		InsertionButton.theButtons = new ArrayList<InsertionButton>();
 		
 		GridLayout layout = new GridLayout(GameBoard.WIDTH+2, GameBoard.HEIGHT+2);
 		this.setLayout(layout);
@@ -47,7 +49,7 @@ public class TopArea extends JPanel {
 		{
 			for(int j = 0; j < GameBoard.WIDTH+2; j++)
 			{
-				InsertionButton button = new InsertionButton(j, i);
+				InsertionButton button = new InsertionButton(j, i, this.mainWindow);
 				if(i == 0 || i == GameBoard.HEIGHT+1)
 				{
 					if(j == 0 || j == GameBoard.HEIGHT+1)

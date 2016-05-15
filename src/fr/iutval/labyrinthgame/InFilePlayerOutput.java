@@ -69,7 +69,7 @@ public class InFilePlayerOutput implements PlayerOutput
 	/**
 	 * @see fr.iutval.labyrinthgame.PlayerOutput#playerHasChanged(fr.iutval.labyrinthgame.Player)
 	 */
-	public void playerHasChanged(Player currentPlayer) {
+	public void playerHasChanged(int playerId, Tile freeCard, Treasure searchedTreasure) {
 		// do nothing		
 	}
 }

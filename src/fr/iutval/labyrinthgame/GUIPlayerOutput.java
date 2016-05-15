@@ -27,14 +27,13 @@ public class GUIPlayerOutput implements PlayerOutput {
 
 	@Override
 	public void gameIsOver(int playerIds) {
-		// TODO Auto-generated method stub
+		// TODO
 
 	}
 
 	@Override
-	public void playerHasChanged(Player currentPlayer) {
-		// TODO Auto-generated method stub
-
+	public void playerHasChanged(int playerId, Tile freeCard, Treasure searchedTreasure) {
+		this.mainWindow.bottomArea.refreshBottomArea(playerId, freeCard, searchedTreasure);
 	}
 
 }

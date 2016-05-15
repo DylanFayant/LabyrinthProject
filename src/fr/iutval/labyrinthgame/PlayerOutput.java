@@ -22,7 +22,9 @@ public interface PlayerOutput
 	
 	/**
 	 * Make something when the player has changed
-	 * @param currentPlayer
+	 * @param playerId 
+	 * @param freeCard 
+	 * @param searchedTile 
 	 */
-	public void playerHasChanged(Player currentPlayer);
+	public void playerHasChanged(int playerId, Tile freeCard, Treasure searchedTreasure);
 }
