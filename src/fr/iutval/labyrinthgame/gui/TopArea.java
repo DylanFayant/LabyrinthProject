@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import fr.iutval.labyrinthgame.GameBoard;
+import fr.iutval.labyrinthgame.PositionInTheGameBoard;
+import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
 
 /**
  * @author TODO
@@ -70,9 +73,26 @@ public class TopArea extends JPanel {
 				}
 				else
 				{
-					JPanel panel = new JPanel();
-					JLabel picLabel = new JLabel(new ImageIcon("img/"+(gameBoard.getGameBoard()[i-1][j-1]).getLink()+".png"));
-					panel.add(picLabel);
+					PanelImage panel = new PanelImage("img/"+(gameBoard.getGameBoard()[i-1][j-1]).getLink()+".png");
+					
+					PositionInTheGameBoard currentPosition = null;
+					try {
+						currentPosition = new PositionInTheGameBoard(j-1, i-1);
+					} catch (XisNotInGameboardException | YisNotInGameboardException e) {
+						// impossible
+					}
+					if(gameBoard.getPawns().containsValue(currentPosition))
+					{
+						if(gameBoard.getPawns().get(0).equals(currentPosition))
+							panel.paintComponent("img/player0.png");
+						if(gameBoard.getPawns().get(1).equals(currentPosition))
+							panel.paintComponent("img/player1.png");
+						if(gameBoard.getPawns().get(2).equals(currentPosition))
+							panel.paintComponent("img/player2.png");
+						if(gameBoard.getPawns().get(3).equals(currentPosition))
+							panel.paintComponent("img/player3.png");
+					}
+					
 					this.add(panel);
 				}
 			}
