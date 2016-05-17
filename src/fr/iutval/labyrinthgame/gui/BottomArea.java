@@ -106,6 +106,10 @@ public class BottomArea extends JPanel implements ActionListener{
 	 * @param searchedTreasure
 	 */
 	public void refreshBottomArea(int playerId, Tile freeCard, Treasure searchedTreasure) {
+		this.playerId = playerId;
+		this.freeCard = freeCard;
+		this.searchedTreasure = searchedTreasure;
+		
 		this.removeAll();
 	    
 	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
