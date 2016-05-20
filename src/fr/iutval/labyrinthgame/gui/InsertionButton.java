@@ -8,6 +8,13 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
+import fr.iutval.labyrinthgame.GUIPlayer;
+import fr.iutval.labyrinthgame.Insertion;
+import fr.iutval.labyrinthgame.PositionInTheGameBoard;
+import fr.iutval.labyrinthgame.Rotation;
+import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+
 /**
  * @author TODO
  *
@@ -24,7 +31,7 @@ public class InsertionButton extends JButton implements ActionListener{
 	/**
 	 * 
 	 */
-	private MainWindow mainWindow;
+	private GUIPlayer mainWindow;
 	/**
 	 * 
 	 */
@@ -36,7 +43,7 @@ public class InsertionButton extends JButton implements ActionListener{
 	 * @param y
 	 * @param mainWindow 
 	 */
-	public InsertionButton(int x, int y, MainWindow mainWindow) {
+	public InsertionButton(int x, int y, GUIPlayer mainWindow) {
 		super();
 		this.mainWindow = mainWindow;
 		this.x = x;
@@ -47,17 +54,14 @@ public class InsertionButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		/*
-		 * Creates the insertion
-		 * Process the insertion (TODO: find a way to link to the input system...)
-		 * Make the buttons disabled + the rotation of the free card
-		 */
-		this.mainWindow.bottomArea.theTile.setEnabled(false);
-		for(InsertionButton button : InsertionButton.theButtons)
+		try
 		{
-			button.setEnabled(false);
+			this.mainWindow.theInsertion = new Insertion(new PositionInTheGameBoard(this.x, this.y), Rotation.values()[this.mainWindow.bottomArea.tileRotation]);
 		}
-		SwingUtilities.updateComponentTreeUI(this.mainWindow);		
+		catch (XisNotInGameboardException | YisNotInGameboardException e)
+		{
+			// TODO
+		}
 	}
 
 }

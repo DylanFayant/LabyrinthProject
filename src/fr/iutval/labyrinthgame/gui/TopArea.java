@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import fr.iutval.labyrinthgame.GUIPlayer;
 import fr.iutval.labyrinthgame.GameBoard;
 import fr.iutval.labyrinthgame.PositionInTheGameBoard;
 import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
@@ -23,12 +24,13 @@ import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
  */
 public class TopArea extends JPanel {
 
-	private MainWindow mainWindow;
+	public GUIPlayer mainWindow;
+	public GameBoard gameBoard;
 
 	/**
 	 * @param mainWindow
 	 */
-	public TopArea(MainWindow mainWindow) {
+	public TopArea(GUIPlayer mainWindow) {
 		this.mainWindow = mainWindow;
 		
 		GridLayout layout = new GridLayout(GameBoard.WIDTH+2, GameBoard.HEIGHT+2);
@@ -41,7 +43,8 @@ public class TopArea extends JPanel {
 	 * @param gameBoard
 	 */
 	@SuppressWarnings("deprecation")
-	public void loadGameBoard(GameBoard gameBoard) {
+	public void loadGameBoard(GameBoard gameBoard) { 
+		this.gameBoard = gameBoard;
 		this.removeAll();
 		InsertionButton.theButtons = new ArrayList<InsertionButton>();
 		
@@ -53,6 +56,11 @@ public class TopArea extends JPanel {
 			for(int j = 0; j < GameBoard.WIDTH+2; j++)
 			{
 				InsertionButton button = new InsertionButton(j, i, this.mainWindow);
+				if(this.mainWindow.canInsert)
+					button.setEnabled(true);
+				else
+					button.setEnabled(false);
+				
 				if(i == 0 || i == GameBoard.HEIGHT+1)
 				{
 					if(j == 0 || j == GameBoard.HEIGHT+1)
@@ -98,8 +106,8 @@ public class TopArea extends JPanel {
 			}
 			
 		}
-
-		SwingUtilities.updateComponentTreeUI(this);
+		
+		SwingUtilities.updateComponentTreeUI(this.getParent());
 	}
 
 }

@@ -1,5 +1,4 @@
 package fr.iutval.labyrinthgame;
-import fr.iutval.labyrinthgame.gui.MainWindow;
 
 
 /**
@@ -13,9 +12,15 @@ public class MainWithGUI {
 	 * @param args command-line arguments (unused)
 	 */
 	public static void main(String[] args) {
-		MainWindow theWindow = new MainWindow();
-		PlayerInput playerInput = new SimulatedPlayerInput();
-		PlayerOutput playerOutput = new GUIPlayerOutput(theWindow);
+
+		PlayerInput playerInput[] = new PlayerInput[4];
+		for(int playerNum = 0; playerNum < 4; playerNum++)
+			playerInput[playerNum] = new GUIPlayer();
+		
+		PlayerOutput playerOutput[] = new PlayerOutput[4];
+		for(int playerNum = 0; playerNum < 4; playerNum++)
+			playerOutput[playerNum] = (PlayerOutput) playerInput[playerNum];
+
 		new LabyrinthGame(playerInput, playerOutput).play(); 
 	}
 

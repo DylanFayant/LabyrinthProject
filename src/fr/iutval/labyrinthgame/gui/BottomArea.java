@@ -4,11 +4,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import fr.iutval.labyrinthgame.GUIPlayer;
 import fr.iutval.labyrinthgame.Tile;
 import fr.iutval.labyrinthgame.Treasure;
 
@@ -24,7 +27,7 @@ public class BottomArea extends JPanel implements ActionListener{
 	/**
 	 * 
 	 */
-	public MainWindow mainWindow;
+	public GUIPlayer mainWindow;
 	/**
 	 * 
 	 */
@@ -54,7 +57,7 @@ public class BottomArea extends JPanel implements ActionListener{
 	 * @param mainWindow 
 	 * 
 	 */
-	public BottomArea(MainWindow mainWindow, int playerId, Tile freeCard, Treasure searchedTreasure) {
+	public BottomArea(GUIPlayer mainWindow, int playerId, Tile freeCard, Treasure searchedTreasure) {
 		this.mainWindow = mainWindow;
 		this.tileRotation = 0;
 		this.playerId = playerId;
@@ -71,6 +74,8 @@ public class BottomArea extends JPanel implements ActionListener{
 	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
 	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 
+	    this.theTile.setEnabled(false);
+	    
 	    this.add(this.theTile);
 	    this.add(this.thePlayer);
 	    this.add(this.searchedCard);
@@ -92,7 +97,7 @@ public class BottomArea extends JPanel implements ActionListener{
 		    this.thePlayer = new JButton("Player " + playerId);
 		    this.thePlayer.setPreferredSize(new Dimension(20, 0));
 		    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
-
+		    
 		    this.add(this.theTile);
 		    this.add(this.thePlayer);
 		    this.add(this.searchedCard);
@@ -116,6 +121,8 @@ public class BottomArea extends JPanel implements ActionListener{
 	    this.theTile.addActionListener(this);
 	    this.thePlayer = new JButton("Player " + playerId);
 	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
+
+	    this.theTile.setEnabled(false);
 
 	    this.add(this.theTile);
 	    this.add(this.thePlayer);

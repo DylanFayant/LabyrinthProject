@@ -1,8 +1,6 @@
 package fr.iutval.labyrinthgame;
 import java.io.IOException;
 
-import fr.iutval.labyrinthgame.gui.MainWindow;
-
 
 /**
  * Application that launches a Labyrinth game
@@ -14,17 +12,16 @@ public class Main {
 	 * Application's main
 	 * @param args command-line arguments (unused)
 	 */
-	public static void main(String[] args) {
-		System.out.println(Tile.TILE1);
-		System.out.println(Tile.TILE2);
-		System.out.println(Tile.TILE3);
-		new MainWindow();
+	public static void main(String[] args) {		
+		PlayerInput playerInput[] = new SimulatedPlayerInput[4];
+		for(int playerNum = 0; playerNum < 4; playerNum++)
+			playerInput[playerNum] = new SimulatedPlayerInput();
 		
-		PlayerInput playerInput = new SimulatedPlayerInput();
-		PlayerOutput playerOutput = null;
+		PlayerOutput playerOutput[] = new InFilePlayerOutput[4];
 		try
 		{
-			playerOutput = new InFilePlayerOutput("log.txt");
+			for(int playerNum = 0; playerNum < 4; playerNum++)
+				playerOutput[playerNum] = new InFilePlayerOutput("logPlayer" + playerNum + ".txt");
 		}
 		catch (IOException e)
 		{

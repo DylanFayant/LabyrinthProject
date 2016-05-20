@@ -28,7 +28,7 @@ public class PanelImage extends JPanel {
 		try {
 			this.image = ImageIO.read(new File(path));
 			
-			Image anotherImage = this.image.getScaledInstance(110, 100, Image.SCALE_SMOOTH);
+			Image anotherImage = this.image.getScaledInstance(50, 40, Image.SCALE_SMOOTH);
 			
 			this.image = new BufferedImage(anotherImage.getWidth(null), anotherImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
@@ -68,7 +68,7 @@ public class PanelImage extends JPanel {
 		    bGr.drawImage(anotherImage, 0, 0, null);
 		    bGr.dispose();
 			
-			anotherImage = this.image.getScaledInstance(110, 100, Image.SCALE_SMOOTH);
+			anotherImage = this.image.getScaledInstance(50, 40, Image.SCALE_SMOOTH);
 			
 			this.image = new BufferedImage(anotherImage.getWidth(null), anotherImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
@@ -83,7 +83,7 @@ public class PanelImage extends JPanel {
 			g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
 			                RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY); 
 		  
-			g2d.drawImage(otherImage, 35, 15, null); 
+			g2d.drawImage(otherImage, 20, 10, null); 
 		  
 			g2d.dispose(); 
 		  

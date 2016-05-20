@@ -24,14 +24,14 @@ public class LabyrinthGame {
 	private final Player[] players;
 	
 	/**
-	 * the players input
+	 * the players inputs
 	 */
-	private final PlayerInput playerInput;
+	private final PlayerInput[] playerInput;
 	
 	/**
-	 * the players output
+	 * the players outputs
 	 */
-	private PlayerOutput playerOutput;
+	private PlayerOutput[] playerOutput;
 
 	/**
 	 * creates a new labyrinth game ready to be played (gameboard contains randomly placed mobile tiles and 4 pawns 
@@ -39,8 +39,8 @@ public class LabyrinthGame {
 	 * @param playerInput PlayerInput
 	 * @param playerOutput PlayerOutput
 	 */
-	public LabyrinthGame(PlayerInput playerInput, PlayerOutput playerOutput)
-	{		
+	public LabyrinthGame(PlayerInput[] playerInput, PlayerOutput[] playerOutput)
+	{
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		this.playerInput = playerInput;
 		this.playerOutput = playerOutput;
@@ -104,21 +104,21 @@ public class LabyrinthGame {
 		Player currentPlayer = null;
 		boolean gameIsOver = false;
 		int playerPointer = 0;
-
-		this.playerOutput.gameBoardUpdate(this.gameboard);
 		
 		while(!gameIsOver)
 		{
 			currentPlayer = this.players[playerPointer];
+
+			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
+				this.playerOutput[playerNum].playerHasChanged(currentPlayer.getId(), this.gameboard.getFreeTile(), currentPlayer.getCurrentTreasure());
 			
-			this.playerOutput.playerHasChanged(currentPlayer.getId(), this.gameboard.getFreeTile(), currentPlayer.getCurrentTreasure());
-			
-			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
+			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
+				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
 			Insertion newInsertion = null;
 			while(true)
 			{
-				newInsertion = this.playerInput.askInsertion();
+				newInsertion = this.playerInput[playerPointer].askInsertion();
 				try
 				{
 					this.gameboard.processInsertion(newInsertion);
@@ -129,13 +129,14 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
-
-			this.playerOutput.gameBoardUpdate(this.gameboard);
+			
+			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
+				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
 			while(true)
 			{
 				Movement newMove = new Movement(this.gameboard.pawns.get(currentPlayer.getId()));
-				Movement theMove = this.playerInput.askMove(newMove);
+				Movement theMove = this.playerInput[playerPointer].askMove(newMove);
 				try
 				{
 					this.gameboard.processMoving(theMove, currentPlayer.getId());
@@ -147,7 +148,8 @@ public class LabyrinthGame {
 				}
 			}
 			
-			this.playerOutput.gameBoardUpdate(this.gameboard);
+			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
+				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
 			if(this.gameboard.treasureInPlayerTile(currentPlayer.getId()) == currentPlayer.getCurrentTreasure())
 			{
@@ -157,8 +159,18 @@ public class LabyrinthGame {
 					gameIsOver = true;
 				}
 			}
+			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
+			
+			// SLEEP
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
-		this.playerOutput.gameIsOver(currentPlayer.getId());
+		
+		for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
+			this.playerOutput[playerNum].gameIsOver(currentPlayer.getId());
 	}
 }
