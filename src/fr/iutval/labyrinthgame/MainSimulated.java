@@ -1,12 +1,17 @@
 package fr.iutval.labyrinthgame;
 import java.io.IOException;
 
+import fr.iutval.labyrinthgame.gameIO.InFilePlayerOutput;
+import fr.iutval.labyrinthgame.gameIO.PlayerInput;
+import fr.iutval.labyrinthgame.gameIO.PlayerOutput;
+import fr.iutval.labyrinthgame.gameIO.SimulatedPlayerInput;
+
 
 /**
  * Application that launches a Labyrinth game
  * @author Rachid Taghat - Dylan Fayant
  */
-public class Main {
+public class MainSimulated {
 	
 	/**
 	 * Application's main

@@ -1,11 +1,10 @@
 package fr.iutval.labyrinthgame;
 
 /**
- * All the directions availables to move the pawn
+ * All the directions available to move the pawn
  * @author Rachid Taghat - Dylan Fayant
  */
-public enum Direction
-{
+public enum Direction {
 	/**
 	 * Up direction
 	 */

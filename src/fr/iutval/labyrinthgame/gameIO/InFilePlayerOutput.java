@@ -1,9 +1,13 @@
-package fr.iutval.labyrinthgame;
+package fr.iutval.labyrinthgame.gameIO;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+
+import fr.iutval.labyrinthgame.GameBoard;
+import fr.iutval.labyrinthgame.Tile;
+import fr.iutval.labyrinthgame.Treasure;
 
 
 /**
@@ -49,8 +53,9 @@ public class InFilePlayerOutput implements PlayerOutput
 		
 		this.logsStream = new PrintStream(this.logs);
 	}
+	
 	/**
-	 * @see fr.iutval.labyrinthgame.PlayerOutput#gameBoardUpdate(java.lang.String)
+	 * @see fr.iutval.labyrinthgame.gameIO.PlayerOutput#gameBoardUpdate(java.lang.String)
 	 */
 	public void gameBoardUpdate(GameBoard gameBoard)
 	{
@@ -58,7 +63,7 @@ public class InFilePlayerOutput implements PlayerOutput
 	}
 
 	/**
-	 * @see fr.iutval.labyrinthgame.PlayerOutput#gameIsOver(java.lang.String)
+	 * @see fr.iutval.labyrinthgame.gameIO.PlayerOutput#gameIsOver(java.lang.String)
 	 */
 	public void gameIsOver(int playerId)
 	{
@@ -67,7 +72,7 @@ public class InFilePlayerOutput implements PlayerOutput
 	}
 	
 	/**
-	 * @see fr.iutval.labyrinthgame.PlayerOutput#playerHasChanged(fr.iutval.labyrinthgame.Player)
+	 * @see fr.iutval.labyrinthgame.gameIO.PlayerOutput#playerHasChanged(fr.iutval.labyrinthgame.Player)
 	 */
 	public void playerHasChanged(int playerId, Tile freeCard, Treasure searchedTreasure) {
 		// do nothing		

@@ -11,74 +11,83 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import fr.iutval.labyrinthgame.GUIPlayer;
 import fr.iutval.labyrinthgame.Tile;
 import fr.iutval.labyrinthgame.Treasure;
+import fr.iutval.labyrinthgame.gameIO.GUIPlayer;
 
 /**
- * @author TODO
- *
+ * Represents the bottom area (player informations)
+ * @author Rachid Taghat - Dylan Fayant
  */
+@SuppressWarnings("serial")
 public class BottomArea extends JPanel implements ActionListener{
 	/**
-	 * 
+	 * Button representing the free tile
 	 */
-	public JButton theTile;
+	public JButton freeTileButton;
 	/**
-	 * 
+	 * Save the reference to the main window
 	 */
 	public GUIPlayer mainWindow;
 	/**
-	 * 
+	 * The tile rotation
 	 */
 	public int tileRotation;
 	/**
-	 * 
+	 * Current player id
 	 */
-	public JButton thePlayer;
+	public JButton currentPlayerIdButton;
 	/**
-	 * 
+	 * The searched card
 	 */
-	public JButton searchedCard;
+	public JButton searchedCardButton;
 	/**
-	 * 
-	 */
-	public int playerId;
-	/**
-	 * 
+	 * The free card tile
 	 */
 	public Tile freeCard;
 	/**
-	 * 
+	 * The searched treasure
 	 */
 	public Treasure searchedTreasure;
+	/**
+	 * Current player id
+	 */
+	public int playerId;
 	
 	/**
+	 * Generates the bottom area
 	 * @param mainWindow 
-	 * 
+	 * @param playerId 
+	 * @param freeCard 
+	 * @param searchedTreasure 
 	 */
 	public BottomArea(GUIPlayer mainWindow, int playerId, Tile freeCard, Treasure searchedTreasure) {
+		/*
+		 * Save the informations
+		 */
 		this.mainWindow = mainWindow;
 		this.tileRotation = 0;
-		this.playerId = playerId;
 		this.freeCard = freeCard;
 		this.searchedTreasure = searchedTreasure;
+		this.playerId = playerId;
 		
 		GridLayout experimentLayout = new GridLayout();
-		
 	    this.setLayout(experimentLayout);
 	    
-	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
-	    this.theTile.addActionListener(this);
-	    this.thePlayer = new JButton("Player " + playerId);
-	    this.thePlayer.setPreferredSize(new Dimension(20, 0));
-	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
-
-	    this.theTile.setEnabled(false);
+	    this.freeTileButton = new JButton(new ImageIcon("img/"+this.freeCard+this.tileRotation+".png"));
+	    this.freeTileButton.addActionListener(this);
+	    this.currentPlayerIdButton = new JButton("Player " + this.playerId);
+	    this.currentPlayerIdButton.setPreferredSize(new Dimension(20, 0));
+	    this.searchedCardButton = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 	    
-	    this.add(this.theTile);
-	    this.add(this.thePlayer);
-	    this.add(this.searchedCard);
+	    /*
+	     * By default the rotation of the free tile isn't available
+	     */
+	    this.freeTileButton.setEnabled(false);
+	    
+	    this.add(this.freeTileButton);
+	    this.add(this.currentPlayerIdButton);
+	    this.add(this.searchedCardButton);
 		
 		this.setVisible(true);
 	}
@@ -86,21 +95,22 @@ public class BottomArea extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JComponent source = (JComponent)arg0.getSource();
-		if(source == this.theTile)
+		if(source == this.freeTileButton)
 		{
 			this.tileRotation = (this.tileRotation+90)%360;
 			
 			this.removeAll();
 		    
-		    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
-		    this.theTile.addActionListener(this);
-		    this.thePlayer = new JButton("Player " + playerId);
-		    this.thePlayer.setPreferredSize(new Dimension(20, 0));
-		    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
+		    this.freeTileButton = new JButton(new ImageIcon("img/"+this.freeCard+this.tileRotation+".png"));
+		    this.freeTileButton.addActionListener(this);
+		    this.currentPlayerIdButton = new JButton("Player " + this.playerId);
+		    this.currentPlayerIdButton.setPreferredSize(new Dimension(20, 0));
+		    this.searchedCardButton = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 		    
-		    this.add(this.theTile);
-		    this.add(this.thePlayer);
-		    this.add(this.searchedCard);
+		    this.add(this.freeTileButton);
+		    this.add(this.currentPlayerIdButton);
+		    this.add(this.searchedCardButton);
+		    
 			SwingUtilities.updateComponentTreeUI(this);
 		}
 	}
@@ -111,23 +121,26 @@ public class BottomArea extends JPanel implements ActionListener{
 	 * @param searchedTreasure
 	 */
 	public void refreshBottomArea(int playerId, Tile freeCard, Treasure searchedTreasure) {
-		this.playerId = playerId;
 		this.freeCard = freeCard;
 		this.searchedTreasure = searchedTreasure;
+		this.playerId = playerId;
+		
+		/* By default the free tile button is not enabled */
+		this.freeTileButton.setEnabled(false);
 		
 		this.removeAll();
 	    
-	    this.theTile = new JButton(new ImageIcon("img/"+freeCard+this.tileRotation+".png"));
-	    this.theTile.addActionListener(this);
-	    this.thePlayer = new JButton("Player " + playerId);
-	    this.searchedCard = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
+	    this.freeTileButton = new JButton(new ImageIcon("img/"+this.freeCard+this.tileRotation+".png"));
+	    this.freeTileButton.addActionListener(this);
+	    this.currentPlayerIdButton = new JButton("Player " + this.playerId);
+	    this.searchedCardButton = new JButton(new ImageIcon("img/"+this.searchedTreasure+".png"));
 
-	    this.theTile.setEnabled(false);
+	    this.freeTileButton.setEnabled(false);
 
-	    this.add(this.theTile);
-	    this.add(this.thePlayer);
-	    this.add(this.searchedCard);
+	    this.add(this.freeTileButton);
+	    this.add(this.currentPlayerIdButton);
+	    this.add(this.searchedCardButton);
 
-		//SwingUtilities.updateComponentTreeUI(this); TODO
+		SwingUtilities.updateComponentTreeUI(this);
 	}
 }

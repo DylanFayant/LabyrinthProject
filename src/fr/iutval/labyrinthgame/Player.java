@@ -7,7 +7,6 @@ import fr.iutval.labyrinthgame.exceptions.StackIsEmptyException;
  * @author Rachid Taghat - Dylan Fayant
  */
 public class Player {
-	
 	/**
 	 * The next id gived to a user (to make that unique)
 	 */
@@ -17,6 +16,7 @@ public class Player {
 	 * The player id, used to identify the player.
 	 */
 	private final int id;
+	
 	/** 
 	 * Player's deck
 	 */

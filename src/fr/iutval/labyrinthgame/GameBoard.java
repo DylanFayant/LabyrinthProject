@@ -16,7 +16,6 @@ import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
  * @author Rachid Taghat - Dylan Fayant
  */
 public class GameBoard {
-
 	/**
 	 * Gameboard's width
 	 */
@@ -78,7 +77,6 @@ public class GameBoard {
 	/**
 	 * Create a new gameboard with randomly placed mobile cards and players pawns placed to the corners
 	 * @param playersId the players ids
-	 * @param players The players list
 	 */
 	public GameBoard(int playersId[]) {
 		// Initialization 
@@ -132,7 +130,7 @@ public class GameBoard {
 		Collections.shuffle(tilesMovable);
 		Rotation[] theRotations = Rotation.values();
 		
-		// For all the cells in the array, we put the good tile
+		// For all the cells in the array, we put the good tile (the fixed or a random tile)
 		for(int i = 0; i < GameBoard.WIDTH; i++)
 		{
 			for(int j = 0; j < GameBoard.HEIGHT; j++)
@@ -191,7 +189,7 @@ public class GameBoard {
 				   newInsertion.getaPosition().getY() < 0 && 
 				   newInsertion.getaPosition().getY() >= GameBoard.HEIGHT) throw new InvalidInsertionException();
 		
-		// The insertion must be in a tile movable
+		// The insertion must be in a movable tile
 		if(this.gameBoard[newInsertion.getaPosition().getX()][newInsertion.getaPosition().getY()].isFixed()) throw new InvalidInsertionException();
 		
 		this.freeTile = this.slidesAndInsert(newInsertion, this.freeTile);
@@ -319,18 +317,18 @@ public class GameBoard {
 	{
 		/*
 		 * We have a list of moves
-		 * We must verify each move if they are possible
-		 * if they are not possible => InvalidMoveException
-		 * if they are possible => Moves to the last position of the Movement 
+		 * We must verify if each move is possible
+		 * if one of theme is not possible => InvalidMoveException
+		 * if they are all possible => Moves to the last position of the Movement 
 		 */
-		Iterator<PositionInTheGameBoard> move = newMove.getMovement().iterator();
-		PositionInTheGameBoard x = move.next();
-		while(move.hasNext())
+		Iterator<PositionInTheGameBoard> moveIterator = newMove.getMovement().iterator();
+		PositionInTheGameBoard provisionalStep = moveIterator.next();
+		while(moveIterator.hasNext())
 		{
-			PositionInTheGameBoard previousPosition = x;
-			PositionInTheGameBoard nextPosition = move.next();
+			PositionInTheGameBoard previousPosition = provisionalStep;
+			PositionInTheGameBoard nextPosition = moveIterator.next();
 			if(!this.moveIsValid(previousPosition, nextPosition)) throw new InvalidMoveException();
-			x = nextPosition;
+			provisionalStep = nextPosition;
 		}
 		this.pawns.replace(playerId, newMove.getMovement().get(newMove.getMovement().size()-1));
 	}

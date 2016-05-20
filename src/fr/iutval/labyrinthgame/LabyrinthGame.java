@@ -1,5 +1,7 @@
 package fr.iutval.labyrinthgame;
 import fr.iutval.labyrinthgame.exceptions.*;
+import fr.iutval.labyrinthgame.gameIO.PlayerInput;
+import fr.iutval.labyrinthgame.gameIO.PlayerOutput;
 
 /**
  * This class represents a Labyrinth game.
@@ -7,7 +9,6 @@ import fr.iutval.labyrinthgame.exceptions.*;
  * @author Rachid Taghat - Dylan Fayant
  */
 public class LabyrinthGame {
-	
 	/**
 	 * The players count
 	 */
@@ -41,6 +42,7 @@ public class LabyrinthGame {
 	 */
 	public LabyrinthGame(PlayerInput[] playerInput, PlayerOutput[] playerOutput)
 	{
+		/* Set the player and their i/o */
 		this.players = new Player[LabyrinthGame.DEFAULT_PLAYERS_COUNT];
 		this.playerInput = playerInput;
 		this.playerOutput = playerOutput;
@@ -74,6 +76,7 @@ public class LabyrinthGame {
 		{
 			playersId[i] = this.players[i].getId();
 		}
+		
 		// Generates the gameboard (with players id to link them to they pawns)
 		this.gameboard = new GameBoard(playersId); 
 	}
@@ -108,10 +111,12 @@ public class LabyrinthGame {
 		while(!gameIsOver)
 		{
 			currentPlayer = this.players[playerPointer];
-
+			
+			/* Show that the player has changed for every player */
 			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
 				this.playerOutput[playerNum].playerHasChanged(currentPlayer.getId(), this.gameboard.getFreeTile(), currentPlayer.getCurrentTreasure());
 			
+			/* Show that the gameboard update for every player */
 			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
 				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
@@ -129,7 +134,8 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
-			
+
+			/* Show that the gameboard update for every player */
 			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
 				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
@@ -147,10 +153,12 @@ public class LabyrinthGame {
 					// make the loop
 				}
 			}
-			
+
+			/* Show that the gameboard update for every player */
 			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
 				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
+			/* Check if the game is over or get the next treasure */
 			if(this.gameboard.treasureInPlayerTile(currentPlayer.getId()) == currentPlayer.getCurrentTreasure())
 			{
 				try {
@@ -159,17 +167,12 @@ public class LabyrinthGame {
 					gameIsOver = true;
 				}
 			}
-			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 			
-			// SLEEP
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			/* Change of player */
+			playerPointer = (playerPointer+1)%LabyrinthGame.DEFAULT_PLAYERS_COUNT;
 		}
 		
+		/* Show that the game is over for every player */
 		for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
 			this.playerOutput[playerNum].gameIsOver(currentPlayer.getId());
 	}

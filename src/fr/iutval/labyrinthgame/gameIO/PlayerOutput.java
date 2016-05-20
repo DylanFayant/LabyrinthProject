@@ -1,4 +1,8 @@
-package fr.iutval.labyrinthgame;
+package fr.iutval.labyrinthgame.gameIO;
+
+import fr.iutval.labyrinthgame.GameBoard;
+import fr.iutval.labyrinthgame.Tile;
+import fr.iutval.labyrinthgame.Treasure;
 
 /**
  * Represents a player input
@@ -24,7 +28,7 @@ public interface PlayerOutput
 	 * Make something when the player has changed
 	 * @param playerId 
 	 * @param freeCard 
-	 * @param searchedTile 
+	 * @param searchedTreasure
 	 */
 	public void playerHasChanged(int playerId, Tile freeCard, Treasure searchedTreasure);
 }

@@ -30,8 +30,6 @@ public class Insertion
 	
 	/**
 	 * Generates a random insertion with a position and a rotation
-	 * @param position
-	 * @param rotation
 	 */
 	public Insertion()
 	{

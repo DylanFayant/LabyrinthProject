@@ -1,4 +1,8 @@
-package fr.iutval.labyrinthgame;
+package fr.iutval.labyrinthgame.gameIO;
+
+import fr.iutval.labyrinthgame.Insertion;
+import fr.iutval.labyrinthgame.Movement;
+
 /**
  * Represents a player input
  * @author Rachid Taghat - Dylan Fayant
