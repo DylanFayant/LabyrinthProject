@@ -59,7 +59,12 @@ public class TopArea extends JPanel {
 				InsertionButton button = null;
 				
 				/* If we are in a border of the array we set the empty panel or the button*/
-				if(i == 0)
+				if((j == 0 || j == GameBoard.WIDTH+1) && (i == 0 || i == GameBoard.HEIGHT+1))
+				{
+					// corner space
+					this.add(new JPanel());
+				}
+				else if(i == 0)
 				{
 					if(j%2 != 0)
 						this.add(new JPanel());
@@ -98,11 +103,6 @@ public class TopArea extends JPanel {
 						button = new InsertionButton("<", j-2, i-1, this.mainWindow);
 						this.add(button);
 					}
-				}
-				else if((j == 0 || j == GameBoard.WIDTH+1) && (i == 0 || i == GameBoard.HEIGHT+1))
-				{
-					// corner space
-					this.add(new JPanel());
 				}
 				/* Else if we are in the array (the plate) */
 				else
