@@ -133,6 +133,10 @@ public class TopArea extends JPanel {
 					
 					this.add(panel);
 				}
+				if(this.mainWindow.canInsert && button != null)
+					button.setEnabled(true);
+				else if(button != null)
+					button.setEnabled(false);
 			}
 		}
 		SwingUtilities.updateComponentTreeUI(this.getParent());

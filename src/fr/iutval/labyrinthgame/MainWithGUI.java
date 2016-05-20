@@ -1,6 +1,9 @@
 package fr.iutval.labyrinthgame;
 
+import java.io.IOException;
+
 import fr.iutval.labyrinthgame.gameIO.GUIPlayer;
+import fr.iutval.labyrinthgame.gameIO.InFilePlayerOutput;
 import fr.iutval.labyrinthgame.gameIO.PlayerInput;
 import fr.iutval.labyrinthgame.gameIO.PlayerOutput;
 import fr.iutval.labyrinthgame.gameIO.SimulatedPlayerInput;
@@ -25,7 +28,12 @@ public class MainWithGUI {
 		
 		PlayerOutput playerOutput[] = new PlayerOutput[4];
 		for(int playerNum = 0; playerNum < 3; playerNum++)
-			playerOutput[playerNum] = new GUIPlayer();
+			try {
+				playerOutput[playerNum] = new InFilePlayerOutput("log.txt");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		playerOutput[3] = (PlayerOutput) playerInput[3];
 
 		new LabyrinthGame(playerInput, playerOutput).play(); 
