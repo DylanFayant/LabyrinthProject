@@ -1,9 +1,13 @@
 package fr.iutval.labyrinthgame.gameIO;
 
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 
 import fr.iutval.labyrinthgame.Direction;
@@ -105,7 +109,12 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	 * @see fr.iutval.labyrinthgame.gameIO.PlayerOutput#gameIsOver(int)
 	 */
 	public void gameIsOver(int playerIds) {
-		// TODO
+		this.removeAll();
+		this.setLayout(new GridBagLayout());
+		JLabel defaultText = new JLabel("Player " + playerIds + " win !");
+		GridBagConstraints gbc = new GridBagConstraints();
+		defaultText.setFont(defaultText.getFont().deriveFont(Font.ITALIC, 24.f));
+		this.add(defaultText, gbc);
 
 	}
 
