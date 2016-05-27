@@ -155,11 +155,11 @@ public class LabyrinthGame {
 				try
 				{
 					this.gameboard.processMoving(newMove, currentPlayer.getId());
-					break;
+					this.playerOutput[currentPlayer.getId()].gameBoardUpdate(this.gameboard);
 				}
 				catch(InvalidMoveException e)
 				{
-					// make the loop
+					// ask a direction again
 				}
 			}
 

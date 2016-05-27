@@ -4,16 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
 import fr.iutval.labyrinthgame.Direction;
 import fr.iutval.labyrinthgame.GameBoard;
 import fr.iutval.labyrinthgame.Insertion;
-import fr.iutval.labyrinthgame.Movement;
 import fr.iutval.labyrinthgame.Tile;
 import fr.iutval.labyrinthgame.Treasure;
-import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 import fr.iutval.labyrinthgame.gui.BottomArea;
 import fr.iutval.labyrinthgame.gui.TopArea;
 
@@ -39,10 +36,6 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	 * The insertion selected by the player
 	 */
 	public volatile Insertion theInsertion;
-	/**
-	 * If the movement is terminated
-	 */
-	public volatile boolean endDirection;
 	/**
 	 * The direction returned by the player
 	 */
@@ -139,7 +132,12 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 		this.topArea.loadGameBoard(this.topArea.gameBoard);
 		while(this.theInsertion == null)
 		{
-			// wait
+			try {
+				Thread.sleep(100);
+				// to prevent a bug (else it don't do the action...)
+			} catch (InterruptedException e) {
+				// impossible
+			}
 		}
 		/* The user can't insert */
 		this.canInsert = false;
@@ -155,15 +153,19 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	 */
 	public Direction askDirection()
 	{
-		this.endDirection = false;
-
 		this.setFocusable(true);
 		this.requestFocus();
-		addKeyListener(this);
+		
+		this.addKeyListener(this);
 		this.theDirection = null;
 		while(this.theDirection == null)
 		{
-			// wait
+			try {
+				Thread.sleep(100);
+				// to prevent a bug (else it don't do the action...)
+			} catch (InterruptedException e) {
+				// impossible
+			}
 		}
 		this.removeKeyListener(this);
 		return this.theDirection;
@@ -190,7 +192,7 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 				this.theDirection = Direction.RIGHT;
 				break;
 			case KeyEvent.VK_ENTER:
-				this.endDirection = true;
+				this.theDirection = Direction.END;
 				break;
 		}
 	}
@@ -208,6 +210,6 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	 */
 	public void keyTyped(KeyEvent arg0)
 	{
-		System.out.println("lol1");
+		
 	}
 }
