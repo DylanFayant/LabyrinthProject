@@ -1,10 +1,6 @@
 package fr.iutval.labyrinthgame.gameIO;
-import java.util.Random;
-
 import fr.iutval.labyrinthgame.Direction;
 import fr.iutval.labyrinthgame.Insertion;
-import fr.iutval.labyrinthgame.Movement;
-import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 
 /**
  * Represents a simulated player input
@@ -23,27 +19,12 @@ public class SimulatedPlayerInput implements PlayerInput
 	}
 
 	/**
-	 * Returns a random move
-	 * @param initialMove 
-	 * @return Move, a move (position)
+	 * Returns a random direction
+	 * @return Insertion, a tile insertion.
 	 */
-	public Movement askMove(Movement initialMove)
+	public Direction askDirection()
 	{
-		Direction[] directions = Direction.values();
-		int random = new Random().nextInt(4);
-		while(initialMove.getMovement().size() < random)
-		{
-			while(true)
-			{
-				try {
-					initialMove.nextMove(directions[new Random().nextInt(directions.length)]);
-					break;
-				} catch (PositionIsNotInGameboardException e) {
-					// make a loop
-				}
-			}
-		}
-		return initialMove;
+		return Direction.getRandomDirection();
 	}
 
 }

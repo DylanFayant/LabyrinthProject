@@ -40,13 +40,13 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	 */
 	public volatile Insertion theInsertion;
 	/**
-	 * The returned move
-	 */
-	public Movement movement;
-	/**
 	 * If the movement is terminated
 	 */
-	public volatile boolean endMovement;
+	public volatile boolean endDirection;
+	/**
+	 * The direction returned by the player
+	 */
+	private Direction theDirection;
 	
 	/**
 	 * Generates the player's GUI
@@ -151,26 +151,22 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	}
 
 	/**
-	 * @see fr.iutval.labyrinthgame.gameIO.PlayerInput#askMove(fr.iutval.labyrinthgame.Movement)
+	 * @see fr.iutval.labyrinthgame.gameIO.PlayerInput#askDirection(fr.iutval.labyrinthgame.Movement)
 	 */
-	public Movement askMove(Movement initialMove)
+	public Direction askDirection()
 	{
-		System.out.println("lol");
-		this.endMovement = false;
-		this.movement = initialMove;
+		this.endDirection = false;
 
 		this.setFocusable(true);
 		this.requestFocus();
 		addKeyListener(this);
-		System.out.println(this.getFocusOwner());
-		
-		while(!this.endMovement)
+		this.theDirection = null;
+		while(this.theDirection == null)
 		{
 			// wait
 		}
-		System.out.println("lol3");
 		this.removeKeyListener(this);
-		return initialMove;
+		return this.theDirection;
 	}
 
 	/**
@@ -178,34 +174,24 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyL
 	 */
 	public void keyPressed(KeyEvent arg0)
 	{
-		System.out.println("lol1");
 		int keyPressed = arg0.getKeyCode();
-		try
+		switch(keyPressed)
 		{
-			System.out.println("lol");
-			switch(keyPressed)
-			{
-				case KeyEvent.VK_UP:
-					System.out.println("lol");
-					this.movement.nextMove(Direction.UP);
-					break;
-				case KeyEvent.VK_DOWN:
-					this.movement.nextMove(Direction.DOWN);
-					break;
-				case KeyEvent.VK_LEFT:
-					this.movement.nextMove(Direction.LEFT);
-					break;
-				case KeyEvent.VK_RIGHT:
-					this.movement.nextMove(Direction.RIGHT);
-					break;
-				case KeyEvent.VK_ESCAPE:
-					this.endMovement = true;
-					break;
-			}
-		}
-		catch (PositionIsNotInGameboardException e)
-		{
-			JOptionPane.showMessageDialog(null, "Movement impossible (out of the gameboard).");
+			case KeyEvent.VK_UP:
+				this.theDirection = Direction.UP;
+				break;
+			case KeyEvent.VK_DOWN:
+				this.theDirection = Direction.DOWN;
+				break;
+			case KeyEvent.VK_LEFT:
+				this.theDirection = Direction.LEFT;
+				break;
+			case KeyEvent.VK_RIGHT:
+				this.theDirection = Direction.RIGHT;
+				break;
+			case KeyEvent.VK_ENTER:
+				this.endDirection = true;
+				break;
 		}
 	}
 

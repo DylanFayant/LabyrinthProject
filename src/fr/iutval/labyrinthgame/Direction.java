@@ -1,5 +1,7 @@
 package fr.iutval.labyrinthgame;
 
+import java.util.Random;
+
 /**
  * All the directions available to move the pawn
  * @author Rachid Taghat - Dylan Fayant
@@ -20,7 +22,11 @@ public enum Direction {
 	/**
 	 * Left direction
 	 */
-	LEFT(-1,0);
+	LEFT(-1,0),
+	/**
+	 * END of the movement
+	 */
+	END(0,0);
 	
 	/**
 	 * The x position we moves on
@@ -57,6 +63,15 @@ public enum Direction {
 	public int getyMove()
 	{
 		return this.yMove;
+	}
+	
+	/**
+	 * Get random direction
+	 * @return direction
+	 */
+	public static Direction getRandomDirection()
+	{
+		return Direction.values()[new Random().nextInt(Direction.values().length)];
 	}
 	
 }

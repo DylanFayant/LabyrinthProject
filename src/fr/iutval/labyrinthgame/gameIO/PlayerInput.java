@@ -1,7 +1,7 @@
 package fr.iutval.labyrinthgame.gameIO;
 
+import fr.iutval.labyrinthgame.Direction;
 import fr.iutval.labyrinthgame.Insertion;
-import fr.iutval.labyrinthgame.Movement;
 
 /**
  * Represents a player input
@@ -21,5 +21,5 @@ public interface PlayerInput
 	 * @param initialMove 
 	 * @return Move, a move (position)
 	 */
-	public Movement askMove(Movement initialMove);
+	public Direction askDirection();
 }

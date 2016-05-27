@@ -139,13 +139,22 @@ public class LabyrinthGame {
 			for(int playerNum = 0; playerNum < this.playerOutput.length; playerNum++)
 				this.playerOutput[playerNum].gameBoardUpdate(this.gameboard);
 			
-			while(true)
+			Direction theDirection = null;
+			while(theDirection != Direction.END)
 			{
 				Movement newMove = new Movement(this.gameboard.pawns.get(currentPlayer.getId()));
-				Movement theMove = this.playerInput[playerPointer].askMove(newMove);
+				theDirection = this.playerInput[playerPointer].askDirection();
 				try
 				{
-					this.gameboard.processMoving(theMove, currentPlayer.getId());
+					newMove.nextMove(theDirection);
+				}
+				catch (PositionIsNotInGameboardException e1)
+				{
+					// TODO show that the position is impossible
+				}
+				try
+				{
+					this.gameboard.processMoving(newMove, currentPlayer.getId());
 					break;
 				}
 				catch(InvalidMoveException e)
