@@ -5,7 +5,7 @@ package fr.iutval.labyrinthgame.exceptions;
  * @author Rachid Taghat - Dylan Fayant
  *
  */
-public class XisNotInGameboardException extends Exception
+public class PositionIsNotInGameboardException extends Exception
 {
 
 	/**

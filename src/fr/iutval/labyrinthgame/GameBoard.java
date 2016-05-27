@@ -7,8 +7,7 @@ import java.util.Map;
 
 import fr.iutval.labyrinthgame.exceptions.InvalidInsertionException;
 import fr.iutval.labyrinthgame.exceptions.InvalidMoveException;
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 
 /**
  * This class is used to represent the labyrinth's GameBoard. 
@@ -63,7 +62,7 @@ public class GameBoard {
 			tilesFixed.put(new PositionInTheGameBoard(4, 6), new TilePositionedFixed(Tile.TILE47, Rotation.ROTATION3));
 			tilesFixed.put(new PositionInTheGameBoard(6, 6), new TilePositionedFixed(Tile.TILE49, Rotation.ROTATION4));
 		}
-		catch (XisNotInGameboardException | YisNotInGameboardException e)
+		catch (PositionIsNotInGameboardException e)
 		{
 			// never happens
 		}
@@ -149,7 +148,7 @@ public class GameBoard {
 						this.gameBoard[j][i] = aTile;
 					}
 				}
-				catch (XisNotInGameboardException | YisNotInGameboardException e)
+				catch (PositionIsNotInGameboardException e)
 				{
 					// never happens
 				}
@@ -164,7 +163,7 @@ public class GameBoard {
 			this.pawns.put(playersId[2], new PositionInTheGameBoard(GameBoard.HEIGHT-1,0));
 			this.pawns.put(playersId[3], new PositionInTheGameBoard(GameBoard.HEIGHT-1,GameBoard.WIDTH-1));
 		}
-		catch (XisNotInGameboardException | YisNotInGameboardException e)
+		catch (PositionIsNotInGameboardException e)
 		{
 			// never happens
 		}
@@ -496,7 +495,7 @@ public class GameBoard {
 						aString += this.gameBoard[j][i].toString();
 					else
 						aString += this.gameBoard[j][i].toString(allPlayers);
-				} catch (XisNotInGameboardException | YisNotInGameboardException e) {
+				} catch (PositionIsNotInGameboardException e) {
 					// never happens
 				}
 			}

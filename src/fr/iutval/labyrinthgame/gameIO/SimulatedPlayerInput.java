@@ -4,8 +4,7 @@ import java.util.Random;
 import fr.iutval.labyrinthgame.Direction;
 import fr.iutval.labyrinthgame.Insertion;
 import fr.iutval.labyrinthgame.Movement;
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 
 /**
  * Represents a simulated player input
@@ -39,9 +38,7 @@ public class SimulatedPlayerInput implements PlayerInput
 				try {
 					initialMove.nextMove(directions[new Random().nextInt(directions.length)]);
 					break;
-				} catch (XisNotInGameboardException e) {
-					// make a loop
-				} catch (YisNotInGameboardException e) {
+				} catch (PositionIsNotInGameboardException e) {
 					// make a loop
 				}
 			}

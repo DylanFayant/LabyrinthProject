@@ -2,8 +2,7 @@ package fr.iutval.labyrinthgame;
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 
 /**
  * Represents a movement
@@ -24,7 +23,7 @@ public class Movement
 	 */
 	public Movement(PositionInTheGameBoard position)
 	{
-		movement = new LinkedList<PositionInTheGameBoard>();
+		this.movement = new LinkedList<PositionInTheGameBoard>();
 		this.movement.add(position);
 	}
 	
@@ -41,11 +40,11 @@ public class Movement
 	 * Add the next move (linked to the next move)
 	 * @param direction 
 	 * @throws YisNotInGameboardException 
-	 * @throws XisNotInGameboardException 
+	 * @throws PositionIsNotInGameboardException 
 	 */
-	public void nextMove(Direction direction) throws XisNotInGameboardException, YisNotInGameboardException
+	public void nextMove(Direction direction) throws PositionIsNotInGameboardException
 	{
-		PositionInTheGameBoard previousPosition = this.movement.get(movement.size()-1);
+		PositionInTheGameBoard previousPosition = this.movement.get(this.movement.size()-1);
 		this.movement.add(previousPosition.nextPosition(direction));
 	}
 	

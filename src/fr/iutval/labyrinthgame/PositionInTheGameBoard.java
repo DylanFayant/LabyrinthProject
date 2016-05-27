@@ -1,8 +1,7 @@
 package fr.iutval.labyrinthgame;
 import java.util.Random;
 
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 
 /**
  * Represents a 2D position
@@ -35,13 +34,12 @@ public class PositionInTheGameBoard
 	 * generates a position in the gameboard
 	 * @param x coordinate
 	 * @param y coordinate
-	 * @throws XisNotInGameboardException 
+	 * @throws PositionIsNotInGameboardException 
 	 * @throws YisNotInGameboardException 
 	 */
-	public PositionInTheGameBoard(int x, int y) throws XisNotInGameboardException, YisNotInGameboardException
+	public PositionInTheGameBoard(int x, int y) throws PositionIsNotInGameboardException
 	{
-		if(x < 0 || x >= PositionInTheGameBoard.max_X) throw new XisNotInGameboardException();
-		if(y < 0 || y >= PositionInTheGameBoard.max_Y) throw new YisNotInGameboardException();
+		if(x < 0 || x >= PositionInTheGameBoard.max_X || y < 0 || y >= PositionInTheGameBoard.max_Y) throw new PositionIsNotInGameboardException();
 		this.X = x;
 		this.Y = y;
 	}
@@ -78,9 +76,9 @@ public class PositionInTheGameBoard
 	 * @param direction Direction
 	 * @return the next position 
 	 * @throws YisNotInGameboardException 
-	 * @throws XisNotInGameboardException 
+	 * @throws PositionIsNotInGameboardException 
 	 */
-	public PositionInTheGameBoard nextPosition(Direction direction) throws XisNotInGameboardException, YisNotInGameboardException
+	public PositionInTheGameBoard nextPosition(Direction direction) throws PositionIsNotInGameboardException
 	{
 		return new PositionInTheGameBoard(this.getX()+direction.getxMove(), this.getY()+direction.getyMove());
 	}

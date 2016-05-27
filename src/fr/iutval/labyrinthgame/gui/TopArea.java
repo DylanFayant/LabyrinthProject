@@ -6,8 +6,7 @@ import javax.swing.SwingUtilities;
 
 import fr.iutval.labyrinthgame.GameBoard;
 import fr.iutval.labyrinthgame.PositionInTheGameBoard;
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 import fr.iutval.labyrinthgame.gameIO.GUIPlayer;
 
 /**
@@ -114,7 +113,7 @@ public class TopArea extends JPanel {
 					PositionInTheGameBoard currentPosition = null;
 					try {
 						currentPosition = new PositionInTheGameBoard(j-1, i-1);
-					} catch (XisNotInGameboardException | YisNotInGameboardException e) {
+					} catch (PositionIsNotInGameboardException e) {
 						// impossible
 					}
 					

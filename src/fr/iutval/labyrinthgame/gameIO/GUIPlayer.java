@@ -1,8 +1,10 @@
 package fr.iutval.labyrinthgame.gameIO;
 
-import java.util.Random;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
 import fr.iutval.labyrinthgame.Direction;
@@ -11,8 +13,7 @@ import fr.iutval.labyrinthgame.Insertion;
 import fr.iutval.labyrinthgame.Movement;
 import fr.iutval.labyrinthgame.Tile;
 import fr.iutval.labyrinthgame.Treasure;
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 import fr.iutval.labyrinthgame.gui.BottomArea;
 import fr.iutval.labyrinthgame.gui.TopArea;
 
@@ -21,7 +22,7 @@ import fr.iutval.labyrinthgame.gui.TopArea;
  * @author Rachid Taghat - Dylan Fayant
  */
 @SuppressWarnings("serial")
-public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput {
+public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput, KeyListener {
 	/**
 	 * The top area (the gameboard)
 	 */
@@ -38,6 +39,14 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput {
 	 * The insertion selected by the player
 	 */
 	public volatile Insertion theInsertion;
+	/**
+	 * The returned move
+	 */
+	public Movement movement;
+	/**
+	 * If the movement is terminated
+	 */
+	public volatile boolean endMovement;
 	
 	/**
 	 * Generates the player's GUI
@@ -58,6 +67,7 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput {
 		/* Set the areas */
 		this.topArea = new TopArea(this);
 		this.bottomArea = new BottomArea(this, -1, Tile.TILE1, Treasure.BAT);
+
 		
 		/*
 		 * Split the page
@@ -145,23 +155,73 @@ public class GUIPlayer extends JFrame implements PlayerOutput, PlayerInput {
 	 */
 	public Movement askMove(Movement initialMove)
 	{
-		// TODO : For now random move...
-		Direction[] directions = Direction.values();
-		int random = new Random().nextInt(4);
-		while(initialMove.getMovement().size() < random)
+		System.out.println("lol");
+		this.endMovement = false;
+		this.movement = initialMove;
+
+		this.setFocusable(true);
+		this.requestFocus();
+		addKeyListener(this);
+		System.out.println(this.getFocusOwner());
+		
+		while(!this.endMovement)
 		{
-			while(true)
+			// wait
+		}
+		System.out.println("lol3");
+		this.removeKeyListener(this);
+		return initialMove;
+	}
+
+	/**
+	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+	 */
+	public void keyPressed(KeyEvent arg0)
+	{
+		System.out.println("lol1");
+		int keyPressed = arg0.getKeyCode();
+		try
+		{
+			System.out.println("lol");
+			switch(keyPressed)
 			{
-				try {
-					initialMove.nextMove(directions[new Random().nextInt(directions.length)]);
+				case KeyEvent.VK_UP:
+					System.out.println("lol");
+					this.movement.nextMove(Direction.UP);
 					break;
-				} catch (XisNotInGameboardException e) {
-					// make a loop
-				} catch (YisNotInGameboardException e) {
-					// make a loop
-				}
+				case KeyEvent.VK_DOWN:
+					this.movement.nextMove(Direction.DOWN);
+					break;
+				case KeyEvent.VK_LEFT:
+					this.movement.nextMove(Direction.LEFT);
+					break;
+				case KeyEvent.VK_RIGHT:
+					this.movement.nextMove(Direction.RIGHT);
+					break;
+				case KeyEvent.VK_ESCAPE:
+					this.endMovement = true;
+					break;
 			}
 		}
-		return initialMove;
+		catch (PositionIsNotInGameboardException e)
+		{
+			JOptionPane.showMessageDialog(null, "Movement impossible (out of the gameboard).");
+		}
+	}
+
+	/**
+	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 */
+	public void keyReleased(KeyEvent arg0)
+	{
+		
+	}
+
+	/**
+	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+	 */
+	public void keyTyped(KeyEvent arg0)
+	{
+		System.out.println("lol1");
 	}
 }

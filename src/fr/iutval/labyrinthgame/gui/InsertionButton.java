@@ -6,8 +6,7 @@ import javax.swing.JButton;
 import fr.iutval.labyrinthgame.Insertion;
 import fr.iutval.labyrinthgame.PositionInTheGameBoard;
 import fr.iutval.labyrinthgame.Rotation;
-import fr.iutval.labyrinthgame.exceptions.XisNotInGameboardException;
-import fr.iutval.labyrinthgame.exceptions.YisNotInGameboardException;
+import fr.iutval.labyrinthgame.exceptions.PositionIsNotInGameboardException;
 import fr.iutval.labyrinthgame.gameIO.GUIPlayer;
 
 /**
@@ -58,7 +57,7 @@ public class InsertionButton extends JButton implements ActionListener{
 			// returns the insertion selected by the player in the main window 
 			this.mainWindow.theInsertion = new Insertion(new PositionInTheGameBoard(this.x, this.y), Rotation.values()[this.mainWindow.bottomArea.tileRotation/90]);
 		}
-		catch (XisNotInGameboardException | YisNotInGameboardException e)
+		catch (PositionIsNotInGameboardException e)
 		{
 			// impossible
 		}
